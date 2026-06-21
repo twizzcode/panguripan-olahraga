@@ -126,19 +126,19 @@ export function BookingCreatePage({
       durationHours,
     });
 
-    if (!result.ok) {
-      if (result.reason === "conflict") {
-        setScheduleConflictDialogOpen(true);
-        return;
-      }
-
-      setSubmissionErrorDialogOpen(true);
+    if (result.ok) {
+      setScheduleConflictDialogOpen(false);
+      setSubmissionErrorDialogOpen(false);
+      router.push(`/booking/${result.booking.transactionId}`);
       return;
     }
 
-    setScheduleConflictDialogOpen(false);
-    setSubmissionErrorDialogOpen(false);
-    router.push(`/booking/${result.booking.transactionId}`);
+    if ("reason" in result && result.reason === "conflict") {
+        setScheduleConflictDialogOpen(true);
+        return;
+    }
+
+    setSubmissionErrorDialogOpen(true);
   }
 
   return (

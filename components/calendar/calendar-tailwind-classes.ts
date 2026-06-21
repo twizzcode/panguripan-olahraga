@@ -1,5 +1,12 @@
 import type { CalendarEvent } from './calendar-types'
 
+export const colorOptions = [
+  { value: 'emerald', label: 'Emerald', className: 'bg-emerald-500' },
+  { value: 'amber', label: 'Amber', className: 'bg-amber-500' },
+  { value: 'sky', label: 'Sky', className: 'bg-sky-500' },
+  { value: 'rose', label: 'Rose', className: 'bg-rose-500' },
+] as const
+
 export const bookingStatusOptions: Array<{
   value: CalendarEvent['paymentStatus']
   label: string

@@ -45,7 +45,12 @@ export function SimpleNavbar() {
   const session = authClient.useSession()
   const user = session.data?.user
   const isLoggedIn = Boolean(user)
-  const isAdmin = user?.role === "admin"
+  const isAdmin = Boolean(
+    user &&
+      "role" in user &&
+      typeof user.role === "string" &&
+      user.role === "admin"
+  )
   const initials = useMemo(
     () => getInitials(user?.name, user?.email),
     [user?.email, user?.name]

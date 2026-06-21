@@ -233,6 +233,8 @@ function Highlight<T extends React.ElementType = 'div'>({
   }, [value, defaultValue]);
 
   const id = React.useId();
+  const itemsClassName =
+    !controlledItems && 'itemsClassName' in props ? props.itemsClassName : undefined;
 
   React.useEffect(() => {
     if (mode !== 'parent') return;
@@ -324,11 +326,11 @@ function Highlight<T extends React.ElementType = 'div'>({
       }}
     >
       {enabled
-        ? controlledItems
+          ? controlledItems
           ? render(children)
           : render(
               React.Children.map(children, (child, index) => (
-                <HighlightItem key={index} className={props?.itemsClassName}>
+                <HighlightItem key={index} className={itemsClassName}>
                   {child}
                 </HighlightItem>
               )),

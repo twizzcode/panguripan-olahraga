@@ -30,6 +30,7 @@ export function applyWhatsappTemplate(
 
 export function buildBookingPaymentWhatsappLink({
   adminWhatsappNumber,
+  bookingHourlyRate,
   template,
   booking,
 }: {
