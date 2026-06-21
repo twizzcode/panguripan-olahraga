@@ -1,0 +1,1 @@
+ALTER TABLE "booking" ADD COLUMN "payment_status" text DEFAULT 'unpaid' NOT NULL;
