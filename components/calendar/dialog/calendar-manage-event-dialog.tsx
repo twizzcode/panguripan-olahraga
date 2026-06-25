@@ -38,10 +38,10 @@ export default function CalendarManageEventDialog() {
           <div className="space-y-5">
             <DialogHeader className="pr-10">
               <div className="flex flex-wrap items-center gap-3">
-                <Badge className={getEventStatusClasses(selectedEvent.paymentStatus).badge}>
-                  {selectedEvent.paymentStatus === 'paid'
-                    ? 'Sudah bayar'
-                    : 'Belum bayar'}
+                <Badge className={getEventStatusClasses(selectedEvent.approvalStatus).badge}>
+                  {selectedEvent.approvalStatus === 'approved'
+                    ? 'Disetujui'
+                    : 'Belum disetujui'}
                 </Badge>
                 <Badge className="bg-sky-100 text-sky-700 hover:bg-sky-100">
                   {selectedEvent.transactionId}

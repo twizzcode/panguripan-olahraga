@@ -9,6 +9,8 @@ import {
   IconUserCircle,
 } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 import { authClient } from "@/lib/auth-client"
@@ -23,12 +25,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { siteConfig } from "@/lib/site-config"
-import Link from "next/link";
 
 const navItems = [
-  { name: "Home", href: "/" },
-  { name: "Booking", href: "/booking" },
-  { name: "Pelatihan", href: "/pelatihan" },
+  { name: "Halaman Utama", href: "/" },
+  { name: "Jadwal Lapangan", href: "/booking" },
+  { name: "Klinik Pelatih", href: "/pelatihan" },
 ]
 
 function getInitials(name?: string | null, email?: string | null) {
@@ -70,11 +71,17 @@ export function SimpleNavbar() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur">
-      <div className="relative mx-auto flex h-16 w-full max-w-6xl items-center px-4 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-brand backdrop-blur">
+      <div className="relative mx-auto flex h-20 w-full max-w-6xl items-center px-4 sm:px-6">
         <div className="flex min-w-0 flex-1 items-center">
-          <Link href="/" className="text-base font-semibold tracking-tight">
-            {siteConfig.name}
+          <Link href="/" className="flex items-center">
+            <Image 
+              src="/logo.png" 
+              alt={siteConfig.name}
+              width={56}
+              height={56}
+              className="h-14 w-auto"
+            />
           </Link>
         </div>
 
@@ -83,7 +90,7 @@ export function SimpleNavbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-base font-medium text-brand-foreground/70 transition-colors hover:text-brand-foreground"
             >
               {item.name}
             </Link>
@@ -99,7 +106,7 @@ export function SimpleNavbar() {
                   className="inline-flex items-center justify-center rounded-full transition-colors hover:bg-muted"
                   aria-label="Open user menu"
                 >
-                  <Avatar>
+                  <Avatar size="lg">
                     <AvatarImage
                       src={user?.image ?? undefined}
                       alt={user?.name ?? "User avatar"}
@@ -146,7 +153,7 @@ export function SimpleNavbar() {
           ) : (
             <Button
               asChild
-              className="px-4 text-muted-foreground hover:bg-transparent hover:text-foreground"
+              className="px-4 text-brand-foreground/70 hover:bg-brand-foreground/10 hover:text-brand-foreground"
               variant="ghost"
             >
               <Link href="/login">
@@ -162,7 +169,7 @@ export function SimpleNavbar() {
           aria-expanded={isOpen}
           aria-label="Toggle navigation"
           onClick={() => setIsOpen((current) => !current)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-foreground/20 text-brand-foreground md:hidden"
         >
           <span className="text-lg leading-none">{isOpen ? "x" : "="}</span>
         </button>
@@ -195,7 +202,7 @@ export function SimpleNavbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item.name}
               </Link>

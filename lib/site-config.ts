@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Panguripan Booking",
+  name: "Panguripan Olahraga",
   shortName: "Panguripan",
   description:
-    "Platform booking lapangan untuk cek jadwal, buat reservasi, lanjutkan pembayaran, dan akses pelatihan tim dalam satu alur yang rapi.",
+    "Platform digital sebagai alat bantu untuk mengatur jadwal lapangan dan pembelajaran kepelatihan sepak bola.",
   keywords: [
     "booking lapangan",
     "reservasi lapangan",

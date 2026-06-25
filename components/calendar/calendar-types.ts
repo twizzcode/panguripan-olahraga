@@ -18,7 +18,7 @@ export type CalendarEvent = {
   id: string
   transactionId: string
   status: 'pending' | 'booked'
-  paymentStatus: 'unpaid' | 'paid'
+  approvalStatus: 'pending' | 'approved'
   name: string
   institution: string
   whatsapp: string

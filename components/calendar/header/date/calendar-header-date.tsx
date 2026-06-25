@@ -1,5 +1,6 @@
 import { useCalendarContext } from '../../calendar-context'
 import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 import CalendarHeaderDateIcon from './calendar-header-date-icon'
 import CalendarHeaderDateChevrons from './calendar-header-date-chevrons'
 import CalendarHeaderDateBadge from './calendar-header-date-badge'
@@ -11,7 +12,7 @@ export default function CalendarHeaderDate() {
       <CalendarHeaderDateIcon />
       <div>
         <div className="flex items-center gap-1">
-          <p className="text-lg font-semibold">{format(date, 'MMMM yyyy')}</p>
+          <p className="text-lg font-semibold">{format(date, 'MMMM yyyy', { locale: id })}</p>
           <CalendarHeaderDateBadge />
         </div>
         <CalendarHeaderDateChevrons />

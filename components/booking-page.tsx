@@ -40,18 +40,16 @@ export function BookingPage({
       <section className="px-4 pt-8 text-center sm:px-6 sm:pt-12 lg:px-10 lg:pt-16">
         <div className="mx-auto max-w-5xl space-y-8">
           <div className="space-y-4">
-            <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-7xl">
-              The AI-powered CRM solution.
+            <h1 className="text-balance text-4xl font-semibold tracking-tight text-brand sm:text-5xl lg:text-7xl">
+              Jadwal Lapangan Galang Pengempon
             </h1>
-            <p className="mx-auto max-w-3xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-              Let AI help you manage accounts, deals, and handoffs in one
-              place. Experience the future of CRM with AI-powered insights and
-              automation.
+            <p className="mx-auto max-w-3xl text-pretty text-base leading-7 text-brand sm:text-lg sm:leading-8">
+              Sistem manajemen digital untuk mengatur, memantau, dan merencanakan seluruh agenda penggunaan lapangan terbuka hijau di Desa Galang Pengampon.
             </p>
           </div>
         </div>
 
-        <div className="mt-10 flex justify-center sm:mt-14">
+        {/* <div className="mt-10 flex justify-center sm:mt-14">
           <div className="inline-flex flex-wrap items-center justify-center gap-1 rounded-2xl border border-border/70 bg-muted/50 p-1.5 shadow-sm">
             {featureTabs.map(({ label, icon: Icon }) => {
               const isActive = activeTab === label
@@ -83,7 +81,7 @@ export function BookingPage({
               )
             })}
           </div>
-        </div>
+        </div> */}
       </section>
 
       <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">

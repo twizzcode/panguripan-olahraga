@@ -1,14 +1,12 @@
 import { format } from "date-fns";
 
 import type { bookings } from "@/db/schema";
-import { formatBookingPrice, calculateBookingPrice } from "@/lib/booking-pricing";
 
 export const qrisImageSrc = "/qris-placeholder.svg";
 
 export function applyWhatsappTemplate(
   template: string,
-  booking: typeof bookings.$inferSelect,
-  bookingHourlyRate: number
+  booking: typeof bookings.$inferSelect
 ) {
   const replacements: Record<string, string> = {
     id: booking.transactionId,
@@ -18,9 +16,6 @@ export function applyWhatsappTemplate(
     date: format(booking.startsAt, "dd MMMM yyyy"),
     start_time: format(booking.startsAt, "HH:mm"),
     duration_hours: String(booking.durationHours),
-    amount: formatBookingPrice(
-      calculateBookingPrice(booking.durationHours, bookingHourlyRate)
-    ),
   };
 
   return template.replace(/\{([a-z_]+)\}/g, (_, key: string) => {
@@ -30,19 +25,16 @@ export function applyWhatsappTemplate(
 
 export function buildBookingPaymentWhatsappLink({
   adminWhatsappNumber,
-  bookingHourlyRate,
   template,
   booking,
 }: {
   adminWhatsappNumber: string;
-  bookingHourlyRate: number;
   template: string;
   booking: typeof bookings.$inferSelect;
 }) {
   const message = applyWhatsappTemplate(
     template,
-    booking,
-    bookingHourlyRate
+    booking
   );
 
   return `https://wa.me/${adminWhatsappNumber}?text=${encodeURIComponent(

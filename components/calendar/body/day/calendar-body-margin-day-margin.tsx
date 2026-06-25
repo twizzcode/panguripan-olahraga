@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 import { cn } from '@/lib/utils'
 
 export const hours = Array.from({ length: 24 }, (_, i) => i)
@@ -30,7 +31,7 @@ export default function CalendarBodyMarginDayMargin({
           >
             {hour !== 0 && (
               <span className="absolute text-xs text-muted-foreground -top-2.5 left-2">
-                {format(new Date().setHours(hour, 0, 0, 0), 'h a')}
+                {format(new Date().setHours(hour, 0, 0, 0), 'HH.mm')}
               </span>
             )}
           </div>

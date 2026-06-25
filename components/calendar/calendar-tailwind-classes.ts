@@ -8,15 +8,15 @@ export const colorOptions = [
 ] as const
 
 export const bookingStatusOptions: Array<{
-  value: CalendarEvent['paymentStatus']
+  value: CalendarEvent['approvalStatus']
   label: string
 }> = [
-  { value: 'unpaid', label: 'Belum bayar' },
-  { value: 'paid', label: 'Sudah bayar' },
+  { value: 'pending', label: 'Belum disetujui' },
+  { value: 'approved', label: 'Disetujui' },
 ]
 
-export function getEventStatusClasses(status: CalendarEvent['paymentStatus']) {
-  if (status === 'paid') {
+export function getEventStatusClasses(status: CalendarEvent['approvalStatus']) {
+  if (status === 'approved') {
     return {
       dot: 'bg-emerald-500',
       card: 'bg-emerald-500/10 hover:bg-emerald-500/15 border-emerald-500/40',

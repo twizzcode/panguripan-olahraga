@@ -23,7 +23,7 @@ export default function CalendarBodyDayEvents() {
             <div className="flex items-start gap-2">
               <div
                 className={`mt-1 size-2 rounded-full ${getEventStatusClasses(
-                  event.paymentStatus
+                  event.approvalStatus
                 ).dot}`}
               />
               <div className="min-w-0">

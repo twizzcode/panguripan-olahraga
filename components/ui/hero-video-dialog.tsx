@@ -131,7 +131,7 @@ export function HeroVideoDialog({
               {...selectedAnimation}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               onClick={(event) => event.stopPropagation()}
-              className="relative mx-4 aspect-video w-full max-w-4xl md:mx-0"
+              className="relative mx-4 aspect-video w-full max-w-7xl md:mx-0"
             >
               <motion.button
                 type="button"

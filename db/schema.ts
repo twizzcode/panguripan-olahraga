@@ -82,9 +82,10 @@ export const verifications = pgTable("verification", {
 export const trainings = pgTable("training", {
   id: text("id").primaryKey(),
   title: text("title").notNull(),
-  duration: text("duration").notNull(),
+  description: text("description").notNull(),
   videoSrc: text("video_src").notNull(),
   thumbnailSrc: text("thumbnail_src").notNull(),
+  sortOrder: integer("sort_order").notNull().default(0),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
 });
@@ -92,7 +93,6 @@ export const trainings = pgTable("training", {
 export const appSettings = pgTable("app_settings", {
   id: text("id").primaryKey(),
   adminWhatsappNumber: text("admin_whatsapp_number").notNull(),
-  bookingHourlyRate: integer("booking_hourly_rate").notNull(),
   whatsappConfirmationTemplate: text("whatsapp_confirmation_template").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
@@ -105,7 +105,7 @@ export const bookings = pgTable(
     transactionId: text("transaction_id").notNull(),
     userId: text("user_id").references(() => users.id, { onDelete: "set null" }),
     status: text("status").notNull().default("pending"),
-    paymentStatus: text("payment_status").notNull().default("unpaid"),
+    approvalStatus: text("approval_status").notNull().default("pending"),
     name: text("name").notNull(),
     institution: text("institution").notNull(),
     whatsapp: text("whatsapp").notNull(),

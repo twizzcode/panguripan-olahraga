@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { Pencil, Plus, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import {
   createTraining,
   deleteTraining,
   updateTraining,
+  reorderTraining,
 } from "@/app/(admin)/admin/pelatihan/actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,21 +45,22 @@ import {
 type Training = {
   id: string;
   title: string;
-  duration: string;
+  description: string;
   videoSrc: string;
   thumbnailSrc: string;
+  sortOrder: number;
 };
 
 type TrainingFormValues = {
   title: string;
-  duration: string;
+  description: string;
   videoSrc: string;
   thumbnailSrc: string;
 };
 
 const initialValues: TrainingFormValues = {
   title: "",
-  duration: "",
+  description: "",
   videoSrc: "",
   thumbnailSrc: "",
 };
@@ -115,6 +117,28 @@ export function AdminTrainingManager({
     });
   };
 
+  const handleMoveUp = (id: string, currentOrder: number) => {
+    const formData = new FormData();
+    formData.set("id", id);
+    formData.set("direction", "up");
+
+    startTransition(async () => {
+      await reorderTraining(formData);
+      router.refresh();
+    });
+  };
+
+  const handleMoveDown = (id: string, currentOrder: number) => {
+    const formData = new FormData();
+    formData.set("id", id);
+    formData.set("direction", "down");
+
+    startTransition(async () => {
+      await reorderTraining(formData);
+      router.refresh();
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4">
@@ -159,16 +183,39 @@ export function AdminTrainingManager({
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>Urutan</TableHead>
                 <TableHead>Thumbnail</TableHead>
-                <TableHead>Title</TableHead>
-                <TableHead>Durasi</TableHead>
+                <TableHead>Judul</TableHead>
+                <TableHead>Deskripsi</TableHead>
                 <TableHead>Video</TableHead>
                 <TableHead>Aksi</TableHead>
               </TableRow>
             </TableHeader>
           <TableBody>
-            {trainings.map((training) => (
+            {trainings.map((training, index) => (
               <TableRow key={training.id}>
+                <TableCell>
+                  <div className="flex flex-col gap-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleMoveUp(training.id, training.sortOrder)}
+                      disabled={isPending || index === 0}
+                      className="h-7 w-7 p-0"
+                    >
+                      <ChevronUp className="size-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleMoveDown(training.id, training.sortOrder)}
+                      disabled={isPending || index === trainings.length - 1}
+                      className="h-7 w-7 p-0"
+                    >
+                      <ChevronDown className="size-4" />
+                    </Button>
+                  </div>
+                </TableCell>
                 <TableCell>
                   <img
                     src={training.thumbnailSrc}
@@ -179,7 +226,9 @@ export function AdminTrainingManager({
                 <TableCell className="max-w-[20rem] font-medium whitespace-normal">
                   {training.title}
                 </TableCell>
-                <TableCell>{training.duration}</TableCell>
+                <TableCell className="max-w-[24rem] whitespace-normal text-sm text-muted-foreground">
+                  {training.description}
+                </TableCell>
                 <TableCell className="max-w-[18rem] whitespace-normal text-xs text-muted-foreground">
                   {training.videoSrc}
                 </TableCell>
@@ -302,14 +351,14 @@ function TrainingForm({
         </Field>
 
         <Field>
-          <FieldLabel htmlFor={`${trainingId ?? "create"}-duration`}>
-            Durasi
+          <FieldLabel htmlFor={`${trainingId ?? "create"}-description`}>
+            Deskripsi
           </FieldLabel>
           <Input
-            id={`${trainingId ?? "create"}-duration`}
-            name="duration"
-            defaultValue={values.duration}
-            placeholder="Contoh: 12 menit"
+            id={`${trainingId ?? "create"}-description`}
+            name="description"
+            defaultValue={values.description}
+            placeholder="Deskripsi singkat pelatihan"
             required
           />
         </Field>

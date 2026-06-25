@@ -75,7 +75,7 @@ export default function CalendarEvent({
   const { events, setSelectedEvent, setManageEventDialogOpen, date } =
     useCalendarContext()
   const style = month ? {} : calculateEventPosition(event, events)
-  const statusClasses = getEventStatusClasses(event.paymentStatus)
+  const statusClasses = getEventStatusClasses(event.approvalStatus)
 
   // Generate a unique key that includes the current month to prevent animation conflicts
   const isEventInCurrentMonth = isSameMonth(event.start, date)

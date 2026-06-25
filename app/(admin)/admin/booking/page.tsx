@@ -16,8 +16,8 @@ import {
 import { IconCoin, IconTrash } from "@tabler/icons-react";
 
 import {
+  approveBooking,
   deleteBooking,
-  markBookingAsPaid,
 } from "@/app/(admin)/admin/booking/actions";
 import { BookingFilters } from "@/app/(admin)/admin/booking/booking-filters";
 import { Badge } from "@/components/ui/badge";
@@ -41,17 +41,12 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/db";
 import { bookings } from "@/db/schema";
-import { getAppSettings } from "@/lib/app-settings";
-import {
-  calculateBookingPrice,
-  formatBookingPrice,
-} from "@/lib/booking-pricing";
 import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
 const PAGE_SIZE = 15;
-const BOOKING_TABS = ["all", "unpaid", "upcoming", "history"] as const;
+const BOOKING_TABS = ["all", "pending", "upcoming", "history"] as const;
 
 type BookingTab = (typeof BOOKING_TABS)[number];
 
@@ -60,7 +55,7 @@ function getBookingTab(value: string | undefined): BookingTab {
     return value as BookingTab;
   }
 
-  return "unpaid";
+  return "pending";
 }
 
 function getPage(value: string | undefined) {
@@ -81,7 +76,7 @@ function buildBookingHref({
 }) {
   const params = new URLSearchParams();
 
-  if (tab !== "unpaid") {
+  if (tab !== "pending") {
     params.set("tab", tab);
   }
 
@@ -107,12 +102,12 @@ function getTabWhereClause(tab: BookingTab, now: Date) {
     case "all":
       return undefined;
     case "upcoming":
-      return and(eq(bookings.paymentStatus, "paid"), gt(bookings.startsAt, now));
+      return and(eq(bookings.approvalStatus, "approved"), gt(bookings.startsAt, now));
     case "history":
-      return and(eq(bookings.paymentStatus, "paid"), lte(bookings.startsAt, now));
-    case "unpaid":
+      return and(eq(bookings.approvalStatus, "approved"), lte(bookings.startsAt, now));
+    case "pending":
     default:
-      return eq(bookings.paymentStatus, "unpaid");
+      return eq(bookings.approvalStatus, "pending");
   }
 }
 
@@ -121,7 +116,6 @@ export default async function AdminBookingPage({
 }: {
   searchParams: Promise<{ tab?: string; q?: string; page?: string; date?: string }>;
 }) {
-  const settings = await getAppSettings();
   const now = new Date();
   const params = await searchParams;
   const tab = getBookingTab(params.tab);
@@ -152,7 +146,7 @@ export default async function AdminBookingPage({
       })()
     : undefined;
 
-  const unpaidWhere = getTabWhereClause("unpaid", now);
+  const pendingWhere = getTabWhereClause("pending", now);
   const upcomingWhere = getTabWhereClause("upcoming", now);
   const historyWhere = getTabWhereClause("history", now);
   const activeWhere = getTabWhereClause(tab, now);
@@ -160,14 +154,14 @@ export default async function AdminBookingPage({
 
   const [
     [{ allCount }],
-    [{ unpaidCount }],
+    [{ pendingCount }],
     [{ upcomingCount }],
     [{ historyCount }],
     [{ totalCount }],
     bookingRequests,
   ] = await Promise.all([
     db.select({ allCount: count() }).from(bookings),
-    db.select({ unpaidCount: count() }).from(bookings).where(unpaidWhere),
+    db.select({ pendingCount: count() }).from(bookings).where(pendingWhere),
     db.select({ upcomingCount: count() }).from(bookings).where(upcomingWhere),
     db.select({ historyCount: count() }).from(bookings).where(historyWhere),
     db.select({ totalCount: count() }).from(bookings).where(filteredWhere),
@@ -192,7 +186,7 @@ export default async function AdminBookingPage({
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">Kelola booking</h2>
             <p className="text-sm text-muted-foreground">
-              Pisahkan booking yang belum dibayar, booking paid yang akan datang,
+              Pisahkan booking yang belum disetujui, booking yang akan datang,
               dan riwayat booking yang sudah lewat.
             </p>
           </div>
@@ -202,8 +196,8 @@ export default async function AdminBookingPage({
 
         <div className="mt-6 flex flex-wrap gap-2">
           {[
-            { key: "all", label: "All", count: allCount },
-            { key: "unpaid", label: "Belum paid", count: unpaidCount },
+            { key: "all", label: "Semua", count: allCount },
+            { key: "pending", label: "Belum disetujui", count: pendingCount },
             { key: "upcoming", label: "Akan datang", count: upcomingCount },
             { key: "history", label: "Riwayat", count: historyCount },
           ].map((item) => {
@@ -248,9 +242,9 @@ export default async function AdminBookingPage({
                 <TableHead>Nama</TableHead>
                 <TableHead>Instansi</TableHead>
                 <TableHead>Nomor WhatsApp</TableHead>
-                <TableHead>Harga</TableHead>
                 <TableHead>Tanggal</TableHead>
                 <TableHead>Jam</TableHead>
+                <TableHead>Durasi</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Aksi</TableHead>
               </TableRow>
@@ -265,45 +259,38 @@ export default async function AdminBookingPage({
                     <TableCell>{request.name}</TableCell>
                     <TableCell>{request.institution}</TableCell>
                     <TableCell>{request.whatsapp}</TableCell>
-                    <TableCell>
-                      {formatBookingPrice(
-                        calculateBookingPrice(
-                          request.durationHours,
-                          settings.bookingHourlyRate
-                        )
-                      )}
-                    </TableCell>
                     <TableCell>{format(request.startsAt, "dd MMM yyyy")}</TableCell>
                     <TableCell>
                       {format(request.startsAt, "HH:mm")} -{" "}
                       {format(request.endsAt, "HH:mm")}
                     </TableCell>
+                    <TableCell>{request.durationHours} jam</TableCell>
                     <TableCell>
                       <Badge
                         variant={
-                          request.paymentStatus === "paid"
+                          request.approvalStatus === "approved"
                             ? "secondary"
                             : "outline"
                         }
                         className={
-                          request.paymentStatus === "paid"
+                          request.approvalStatus === "approved"
                             ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100"
                             : "border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-50"
                         }
                       >
-                        {request.paymentStatus === "paid"
-                          ? "Sudah bayar"
-                          : "Belum bayar"}
+                        {request.approvalStatus === "approved"
+                          ? "Disetujui"
+                          : "Belum disetujui"}
                       </Badge>
                     </TableCell>
                     <TableCell>
                       <div className="flex justify-end gap-2">
-                        {request.paymentStatus !== "paid" ? (
-                          <form action={markBookingAsPaid}>
+                        {request.approvalStatus !== "approved" ? (
+                          <form action={approveBooking}>
                             <input type="hidden" name="id" value={request.id} />
                             <Button size="sm" variant="outline">
                               <IconCoin className="size-4" />
-                              Paid
+                              Setujui
                             </Button>
                           </form>
                         ) : null}

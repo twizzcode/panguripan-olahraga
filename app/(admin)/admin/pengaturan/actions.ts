@@ -6,11 +6,7 @@ import { z } from "zod";
 
 import { db } from "@/db";
 import { appSettings, users } from "@/db/schema";
-import {
-  DEFAULT_SETTINGS_ID,
-  getAppSettings,
-  hasBookingHourlyRateColumn,
-} from "@/lib/app-settings";
+import { DEFAULT_SETTINGS_ID, getAppSettings } from "@/lib/app-settings";
 import { getSession } from "@/lib/auth";
 
 async function requireAdmin() {
@@ -31,7 +27,6 @@ function revalidateSettingsPages() {
 
 const settingsSchema = z.object({
   adminWhatsappNumber: z.string().trim().min(8),
-  bookingHourlyRate: z.coerce.number().int().min(1),
   whatsappConfirmationTemplate: z.string().trim().min(1),
 });
 
@@ -40,33 +35,15 @@ export async function updateAppSettings(formData: FormData) {
 
   const values = settingsSchema.parse({
     adminWhatsappNumber: formData.get("adminWhatsappNumber"),
-    bookingHourlyRate: formData.get("bookingHourlyRate"),
     whatsappConfirmationTemplate: formData.get("whatsappConfirmationTemplate"),
   });
 
   await getAppSettings();
 
-  const canPersistBookingHourlyRate = await hasBookingHourlyRateColumn();
-
-  if (!canPersistBookingHourlyRate) {
-    await db
-      .update(appSettings)
-      .set({
-        adminWhatsappNumber: values.adminWhatsappNumber,
-        whatsappConfirmationTemplate: values.whatsappConfirmationTemplate,
-        updatedAt: new Date(),
-      })
-      .where(eq(appSettings.id, DEFAULT_SETTINGS_ID));
-
-    revalidateSettingsPages();
-    return;
-  }
-
   await db
     .update(appSettings)
     .set({
       adminWhatsappNumber: values.adminWhatsappNumber,
-      bookingHourlyRate: values.bookingHourlyRate,
       whatsappConfirmationTemplate: values.whatsappConfirmationTemplate,
       updatedAt: new Date(),
     })

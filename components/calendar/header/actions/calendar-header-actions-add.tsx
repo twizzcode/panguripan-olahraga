@@ -26,11 +26,11 @@ export default function CalendarHeaderActionsAdd() {
 
   return (
     <Button
-      className="flex items-center gap-1 bg-primary text-background"
+      className="flex items-center gap-1 bg-brand text-background"
       onClick={handleClick}
     >
       <Plus />
-      Add Booking
+      Atur Jadwal
     </Button>
   )
 }

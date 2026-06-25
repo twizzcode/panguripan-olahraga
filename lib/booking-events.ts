@@ -13,7 +13,7 @@ export function serializeBookingEvent(
     id: booking.id,
     transactionId: booking.transactionId,
     status: booking.status as CalendarEvent["status"],
-    paymentStatus: booking.paymentStatus as CalendarEvent["paymentStatus"],
+    approvalStatus: booking.approvalStatus as CalendarEvent["approvalStatus"],
     name: booking.name,
     institution: booking.institution,
     whatsapp: booking.whatsapp,

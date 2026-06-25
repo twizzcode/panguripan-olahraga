@@ -22,7 +22,7 @@ function revalidateBookingPages() {
   revalidatePath("/riwayat-booking");
 }
 
-export async function markBookingAsPaid(formData: FormData) {
+export async function approveBooking(formData: FormData) {
   await requireAdmin();
 
   const id = z.string().trim().min(1).parse(formData.get("id"));
@@ -30,7 +30,7 @@ export async function markBookingAsPaid(formData: FormData) {
   await db
     .update(bookings)
     .set({
-      paymentStatus: "paid",
+      approvalStatus: "approved",
       updatedAt: new Date(),
     })
     .where(eq(bookings.id, id));

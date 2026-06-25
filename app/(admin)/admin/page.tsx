@@ -5,7 +5,6 @@ import { asc, count, eq, gte } from "drizzle-orm";
 import {
   IconArrowRight,
   IconCalendarStats,
-  IconCash,
   IconClockHour4,
   IconUsers,
 } from "@tabler/icons-react";
@@ -23,11 +22,6 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/db";
 import { bookings, users } from "@/db/schema";
-import { getAppSettings } from "@/lib/app-settings";
-import {
-  calculateBookingPrice,
-  formatBookingPrice,
-} from "@/lib/booking-pricing";
 
 export const dynamic = "force-dynamic";
 
@@ -46,11 +40,10 @@ export default async function AdminPage() {
   const now = new Date();
   const thirtyDaysAgo = subDays(now, 30);
   const chartRangeStart = startOfMonth(addMonths(now, -11));
-  const settings = await getAppSettings();
 
   const [
     [{ totalUsers }],
-    paidBookings,
+    approvedBookings,
     recentBookings,
     upcomingBookings,
     monthlyBookings,
@@ -63,15 +56,13 @@ export default async function AdminPage() {
     db
       .select({
         id: bookings.id,
-        durationHours: bookings.durationHours,
         createdAt: bookings.createdAt,
       })
       .from(bookings)
-      .where(eq(bookings.paymentStatus, "paid")),
+      .where(eq(bookings.approvalStatus, "approved")),
     db
       .select({
         id: bookings.id,
-        durationHours: bookings.durationHours,
         createdAt: bookings.createdAt,
       })
       .from(bookings)
@@ -85,7 +76,7 @@ export default async function AdminPage() {
         startsAt: bookings.startsAt,
         endsAt: bookings.endsAt,
         durationHours: bookings.durationHours,
-        paymentStatus: bookings.paymentStatus,
+        approvalStatus: bookings.approvalStatus,
       })
       .from(bookings)
       .where(gte(bookings.startsAt, now))
@@ -101,27 +92,15 @@ export default async function AdminPage() {
       .orderBy(asc(bookings.startsAt)),
   ]);
 
-  const totalRevenue = paidBookings.reduce(
-    (sum, booking) =>
-      sum + calculateBookingPrice(booking.durationHours, settings.bookingHourlyRate),
-    0
-  );
-
+  const totalApprovedBookings = approvedBookings.length;
   const recentBookingsCount = recentBookings.length;
-  const recentRevenue = paidBookings
-    .filter((booking) => booking.createdAt >= thirtyDaysAgo)
-    .reduce(
-      (sum, booking) =>
-        sum +
-        calculateBookingPrice(booking.durationHours, settings.bookingHourlyRate),
-      0
-    );
+  const recentApprovedBookings = approvedBookings.filter((booking) => booking.createdAt >= thirtyDaysAgo).length;
 
   const chartData = buildMonthlyBookingChartData(monthlyBookings, chartRangeStart);
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {[
           {
             label: "User aktif",
@@ -130,21 +109,15 @@ export default async function AdminPage() {
             icon: IconUsers,
           },
           {
-            label: "Pendapatan semua",
-            value: formatBookingPrice(totalRevenue),
-            description: "Akumulasi booking yang status pembayarannya sudah paid.",
-            icon: IconCash,
+            label: "Booking disetujui",
+            value: formatCount(totalApprovedBookings),
+            description: "Total booking yang sudah disetujui admin.",
+            icon: IconCalendarStats,
           },
           {
             label: "Booking 30 hari terakhir",
             value: formatCount(recentBookingsCount),
             description: "Jumlah booking yang dibuat dalam 30 hari terakhir.",
-            icon: IconCalendarStats,
-          },
-          {
-            label: "Pendapatan 30 hari terakhir",
-            value: formatBookingPrice(recentRevenue),
-            description: "Pendapatan dari booking paid dalam 30 hari terakhir.",
             icon: IconClockHour4,
           },
         ].map((item) => (
@@ -209,17 +182,9 @@ export default async function AdminPage() {
               </p>
             </div>
             <div className="rounded-2xl border border-border p-4">
-              <p className="text-sm text-muted-foreground">Pendapatan masuk</p>
+              <p className="text-sm text-muted-foreground">Booking disetujui</p>
               <p className="mt-2 text-2xl font-semibold">
-                {formatBookingPrice(recentRevenue)}
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border p-4">
-              <p className="text-sm text-muted-foreground">Rata-rata per booking</p>
-              <p className="mt-2 text-2xl font-semibold">
-                {recentBookingsCount
-                  ? formatBookingPrice(Math.round(recentRevenue / recentBookingsCount))
-                  : formatBookingPrice(0)}
+                {formatCount(recentApprovedBookings)}
               </p>
             </div>
           </div>
@@ -251,7 +216,7 @@ export default async function AdminPage() {
                 <TableHead>Instansi</TableHead>
                 <TableHead>Tanggal</TableHead>
                 <TableHead>Jam</TableHead>
-                <TableHead>Harga</TableHead>
+                <TableHead>Durasi</TableHead>
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
@@ -273,30 +238,23 @@ export default async function AdminPage() {
                       {format(booking.startsAt, "HH:mm")} -{" "}
                       {format(booking.endsAt, "HH:mm")}
                     </TableCell>
-                    <TableCell>
-                      {formatBookingPrice(
-                        calculateBookingPrice(
-                          booking.durationHours,
-                          settings.bookingHourlyRate
-                        )
-                      )}
-                    </TableCell>
+                    <TableCell>{booking.durationHours} jam</TableCell>
                     <TableCell>
                       <Badge
                         variant={
-                          booking.paymentStatus === "paid"
+                          booking.approvalStatus === "approved"
                             ? "secondary"
                             : "outline"
                         }
                         className={
-                          booking.paymentStatus === "paid"
+                          booking.approvalStatus === "approved"
                             ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100"
                             : "border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-50"
                         }
                       >
-                        {booking.paymentStatus === "paid"
-                          ? "Sudah bayar"
-                          : "Belum bayar"}
+                        {booking.approvalStatus === "approved"
+                          ? "Disetujui"
+                          : "Belum disetujui"}
                       </Badge>
                     </TableCell>
                   </TableRow>

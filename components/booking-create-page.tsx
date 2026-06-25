@@ -33,7 +33,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { calculateBookingPrice, formatBookingPrice } from "@/lib/booking-pricing";
 
 const startTimeOptions = Array.from({ length: 16 }, (_, index) => {
   const hour = index + 7;
@@ -42,11 +41,7 @@ const startTimeOptions = Array.from({ length: 16 }, (_, index) => {
 
 const durationOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
-export function BookingCreatePage({
-  bookingHourlyRate,
-}: {
-  bookingHourlyRate: number;
-}) {
+export function BookingCreatePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [scheduleConflictDialogOpen, setScheduleConflictDialogOpen] =
@@ -85,10 +80,14 @@ export function BookingCreatePage({
     whatsapp: "",
   });
 
-  const totalPrice = calculateBookingPrice(
-    Number(formValues.durationHours),
-    bookingHourlyRate
-  );
+  const endTime = useMemo(() => {
+    const [hours, minutes] = formValues.startTime.split(":").map(Number);
+    const duration = Number(formValues.durationHours);
+    const totalMinutes = (hours || 0) * 60 + (minutes || 0) + duration * 60;
+    const endHour = Math.floor(totalMinutes / 60);
+    const endMinute = totalMinutes % 60;
+    return `${String(endHour).padStart(2, "0")}:${String(endMinute).padStart(2, "0")}`;
+  }, [formValues.startTime, formValues.durationHours]);
 
   function handleChange(name: keyof typeof formValues, value: string) {
     setFormValues((current) => ({
@@ -145,15 +144,11 @@ export function BookingCreatePage({
     <>
       <div className="w-full py-8 sm:py-10">
         <div className="space-y-2">
-          <div className="flex flex-wrap items-center gap-3">
-            <Badge variant="outline">Booking</Badge>
-            <Badge variant="outline">Full page</Badge>
-          </div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Buat booking baru
+            Pengajuan Jadwal Lapangan
           </h1>
           <p className="text-sm text-muted-foreground sm:text-base">
-            Isi detail booking, lalu lanjutkan ke pembayaran setelah data
+            Isi detail pengajuan, lalu konfirmasi setelah data
             tersimpan.
           </p>
         </div>
@@ -255,7 +250,7 @@ export function BookingCreatePage({
                 </Field>
 
                 <Field>
-                  <FieldLabel>Berapa jam</FieldLabel>
+                  <FieldLabel>Durasi</FieldLabel>
                   <DropdownMenu
                     open={durationMenuOpen}
                     onOpenChange={(open) => {
@@ -309,7 +304,9 @@ export function BookingCreatePage({
               </FieldGroup>
 
               <div className="flex flex-wrap items-center gap-3">
-                <Button type="submit">Create booking</Button>
+                <Button type="submit" className="bg-brand text-background">
+                  Ajukan Jadwal
+                </Button>
                 <Button type="button" variant="outline" asChild>
                   <Link href="/booking">Kembali ke kalender</Link>
                 </Button>
@@ -320,27 +317,15 @@ export function BookingCreatePage({
           <aside className="rounded-3xl border border-border bg-card p-5 shadow-sm sm:p-6">
             <div className="space-y-4">
               <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Total harga</p>
+                <p className="text-sm text-muted-foreground">Total durasi</p>
                 <p className="text-3xl font-semibold text-foreground">
-                  {formatBookingPrice(totalPrice)}
+                  {formValues.durationHours} Jam
                 </p>
               </div>
 
               <Separator />
 
               <div className="space-y-3 text-sm">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-muted-foreground">Tarif</span>
-                  <span className="font-medium text-foreground">
-                    {formatBookingPrice(bookingHourlyRate)}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-muted-foreground">Durasi</span>
-                  <span className="font-medium text-foreground">
-                    {formValues.durationHours} jam
-                  </span>
-                </div>
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-muted-foreground">Tanggal</span>
                   <span className="font-medium text-foreground">
@@ -351,6 +336,12 @@ export function BookingCreatePage({
                   <span className="text-muted-foreground">Jam mulai</span>
                   <span className="font-medium text-foreground">
                     {formValues.startTime}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-muted-foreground">Jam selesai</span>
+                  <span className="font-medium text-foreground">
+                    {endTime}
                   </span>
                 </div>
               </div>

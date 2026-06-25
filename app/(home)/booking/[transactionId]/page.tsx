@@ -35,26 +35,26 @@ export default async function BookingPaymentPage({
       <div className="space-y-2">
         <div className="flex flex-wrap items-center gap-3">
           <Badge
-            variant={booking.paymentStatus === "paid" ? "secondary" : "outline"}
+            variant={booking.approvalStatus === "approved" ? "secondary" : "outline"}
             className={
-              booking.paymentStatus === "paid"
+              booking.approvalStatus === "approved"
                 ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100"
                 : "border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-50"
             }
           >
-            {booking.paymentStatus === "paid" ? "Sudah bayar" : "Belum bayar"}
+            {booking.approvalStatus === "approved" ? "Sudah disetujui" : "Belum disetujui"}
           </Badge>
           <Badge className="bg-sky-100 text-sky-700 hover:bg-sky-100">
             {booking.transactionId}
           </Badge>
         </div>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          Pembayaran booking
+          Pengajuan Persetujuan
         </h1>
         <p className="text-sm text-muted-foreground sm:text-base">
-          {booking.paymentStatus === "paid"
-            ? "Pembayaran booking ini sudah tercatat."
-            : "Booking ini belum dibayar. Lanjutkan pembayaran di bawah."}
+          {booking.approvalStatus === "approved"
+            ? "Booking ini sudah disetujui admin."
+            : "Booking ini belum disetujui. Hubungi admin untuk konfirmasi."}
         </p>
       </div>
 
@@ -62,7 +62,6 @@ export default async function BookingPaymentPage({
         <BookingPaymentPanel
           booking={booking}
           adminWhatsappNumber={settings.adminWhatsappNumber}
-          bookingHourlyRate={settings.bookingHourlyRate}
           whatsappTemplate={settings.whatsappConfirmationTemplate}
         />
       </div>

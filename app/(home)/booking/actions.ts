@@ -73,7 +73,7 @@ export async function createBooking(
     transactionId,
     userId: session.user.id,
     status: "pending" as const,
-    paymentStatus: "unpaid" as const,
+    approvalStatus: "pending" as const,
     name: parsed.data.name,
     institution: parsed.data.institution,
     whatsapp: parsed.data.whatsapp,

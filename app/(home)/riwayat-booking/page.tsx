@@ -14,12 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getSession } from "@/lib/auth";
-import { getAppSettings } from "@/lib/app-settings";
 import { getRecentBookingsByUserId } from "@/lib/bookings";
-import {
-  calculateBookingPrice,
-  formatBookingPrice,
-} from "@/lib/booking-pricing";
 
 export const dynamic = "force-dynamic";
 
@@ -30,7 +25,6 @@ export default async function BookingHistoryPage() {
     redirect("/login?next=/riwayat-booking");
   }
 
-  const settings = await getAppSettings();
   const bookings = await getRecentBookingsByUserId(session.user.id, 10);
 
   return (
@@ -54,7 +48,6 @@ export default async function BookingHistoryPage() {
               <TableHead>Tanggal</TableHead>
               <TableHead>Jam</TableHead>
               <TableHead>Durasi</TableHead>
-              <TableHead>Harga</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Aksi</TableHead>
             </TableRow>
@@ -77,29 +70,21 @@ export default async function BookingHistoryPage() {
                   </TableCell>
                   <TableCell>{booking.durationHours} jam</TableCell>
                   <TableCell>
-                    {formatBookingPrice(
-                      calculateBookingPrice(
-                        booking.durationHours,
-                        settings.bookingHourlyRate
-                      )
-                    )}
-                  </TableCell>
-                  <TableCell>
                     <Badge
                       variant={
-                        booking.paymentStatus === "paid"
+                        booking.approvalStatus === "approved"
                           ? "secondary"
                           : "outline"
                       }
                       className={
-                        booking.paymentStatus === "paid"
+                        booking.approvalStatus === "approved"
                           ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100"
                           : "border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-50"
                       }
                     >
-                      {booking.paymentStatus === "paid"
-                        ? "Sudah bayar"
-                        : "Belum bayar"}
+                      {booking.approvalStatus === "approved"
+                        ? "Disetujui"
+                        : "Belum disetujui"}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
@@ -117,7 +102,7 @@ export default async function BookingHistoryPage() {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={9}
+                  colSpan={8}
                   className="py-10 text-center text-muted-foreground"
                 >
                   Belum ada riwayat booking.

@@ -1,4 +1,5 @@
 import { format, isSameDay } from 'date-fns'
+import { id } from 'date-fns/locale'
 import { cn } from '../../../lib/utils'
 import { CALENDAR_HEADER_HEIGHT } from './day/calendar-body-margin-day-margin'
 
@@ -25,7 +26,7 @@ export default function CalendarBodyHeader({
           isToday ? 'text-primary' : 'text-muted-foreground'
         )}
       >
-        {format(date, 'EEE')}
+        {format(date, 'EEE', { locale: id })}
       </span>
       {!onlyDay && (
         <span

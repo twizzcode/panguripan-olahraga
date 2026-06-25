@@ -28,7 +28,6 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import { getAppSettings } from "@/lib/app-settings";
 import { getSession } from "@/lib/auth";
-import { formatBookingPrice } from "@/lib/booking-pricing";
 
 export const dynamic = "force-dynamic";
 
@@ -40,7 +39,6 @@ const templatePlaceholders = [
   "{date}",
   "{start_time}",
   "{duration_hours}",
-  "{amount}",
 ];
 
 function getInitials(value: string) {
@@ -108,11 +106,6 @@ export default async function AdminPengaturanPage({
           </div>
 
           <form action={updateAppSettings} className="mt-6 space-y-5">
-            <input
-              type="hidden"
-              name="bookingHourlyRate"
-              value={settings.bookingHourlyRate}
-            />
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="admin-whatsapp-number">
@@ -166,52 +159,7 @@ export default async function AdminPengaturanPage({
           </form>
         </section>
 
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-          <div className="space-y-2">
-            <h2 className="text-lg font-semibold">Harga lapangan</h2>
-            <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-              Tarif ini dipakai di halaman booking, pembayaran, riwayat, dan
-              dashboard.
-            </p>
-          </div>
 
-          <form action={updateAppSettings} className="mt-6 space-y-5">
-            <input
-              type="hidden"
-              name="adminWhatsappNumber"
-              value={settings.adminWhatsappNumber}
-            />
-            <input
-              type="hidden"
-              name="whatsappConfirmationTemplate"
-              value={settings.whatsappConfirmationTemplate}
-            />
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="booking-hourly-rate">
-                  Harga lapangan per jam
-                </FieldLabel>
-                <Input
-                  id="booking-hourly-rate"
-                  name="bookingHourlyRate"
-                  type="number"
-                  min={1}
-                  step={1000}
-                  defaultValue={settings.bookingHourlyRate}
-                  required
-                />
-                <FieldDescription>
-                  Harga aktif saat ini {formatBookingPrice(settings.bookingHourlyRate)}
-                  {" "}per jam.
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-
-            <div className="flex justify-end">
-              <Button type="submit">Simpan harga</Button>
-            </div>
-          </form>
-        </section>
       </div>
 
       <div className="space-y-6">
