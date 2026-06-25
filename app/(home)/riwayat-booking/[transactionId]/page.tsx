@@ -9,5 +9,5 @@ export default async function BookingPaymentHistoryPage({
 }) {
   const { transactionId } = await params;
 
-  redirect(`/booking/${transactionId}`);
+  redirect(`/jadwal-lapangan/${transactionId}`);
 }

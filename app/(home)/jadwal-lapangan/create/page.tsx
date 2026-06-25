@@ -9,7 +9,7 @@ export default async function BookingCreateRoute() {
   const session = await getSession();
 
   if (!session?.user) {
-    redirect("/login?next=/booking/create");
+    redirect("/login?next=/jadwal-lapangan/create");
   }
 
   return <BookingCreatePage />;

@@ -9,7 +9,7 @@ import {
   deleteTraining,
   updateTraining,
   reorderTraining,
-} from "@/app/(admin)/admin/pelatihan/actions";
+} from "@/app/(admin)/admin/klinik-pelatih/actions";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -75,7 +75,7 @@ function SubmitButton({
   isPending: boolean;
 }) {
   return (
-    <Button type="submit" disabled={isPending}>
+    <Button type="submit" disabled={isPending} variant="brand">
       {isPending ? pendingLabel : label}
     </Button>
   );
@@ -150,7 +150,7 @@ export function AdminTrainingManager({
         </div>
         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
           <DialogTrigger asChild>
-            <Button>
+            <Button variant="brand">
               <Plus className="size-4" />
               Tambah Pelatihan
             </Button>

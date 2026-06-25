@@ -6,7 +6,7 @@ import { format, parse, startOfDay } from "date-fns";
 import { CalendarDays, ChevronDown } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { createBooking } from "@/app/(home)/booking/actions";
+import { createBooking } from "@/app/(home)/jadwal-lapangan/actions";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -128,7 +128,7 @@ export function BookingCreatePage() {
     if (result.ok) {
       setScheduleConflictDialogOpen(false);
       setSubmissionErrorDialogOpen(false);
-      router.push(`/booking/${result.booking.transactionId}`);
+      router.push(`/jadwal-lapangan/${result.booking.transactionId}`);
       return;
     }
 
@@ -308,7 +308,7 @@ export function BookingCreatePage() {
                   Ajukan Jadwal
                 </Button>
                 <Button type="button" variant="outline" asChild>
-                  <Link href="/booking">Kembali ke kalender</Link>
+                  <Link href="/jadwal-lapangan">Kembali ke kalender</Link>
                 </Button>
               </div>
             </form>

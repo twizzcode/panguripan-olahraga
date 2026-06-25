@@ -48,10 +48,10 @@ export function HeroShowcase() {
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
           <Button asChild size="lg" className="rounded-md px-5 bg-brand hover:bg-brand/90">
-            <a href="/booking">Jadwal Lapangan</a>
+            <a href="/jadwal-lapangan">Jadwal Lapangan</a>
           </Button>
           <Button asChild variant="outline" size="lg" className="rounded-md px-5 border-brand text-brand hover:bg-brand/10">
-            <a href="/pelatihan">Klinik Pelatih</a>
+            <a href="/klinik-pelatih">Klinik Pelatih</a>
           </Button>
         </motion.div>
       </motion.div>

@@ -25,7 +25,7 @@ export function DashboardBookingsChart({
   }>;
 }) {
   return (
-    <ChartContainer config={chartConfig} className="min-h-72 w-full">
+    <ChartContainer config={chartConfig} className="h-64 w-full">
       <BarChart accessibilityLayer data={data} margin={{ left: 4, right: 4 }}>
         <CartesianGrid vertical={false} />
         <XAxis

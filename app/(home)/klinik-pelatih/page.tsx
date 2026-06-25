@@ -1,5 +1,11 @@
+import { Metadata } from "next"
 import { getTrainings } from "@/lib/pelatihan"
 import { PelatihanVideoList } from "@/components/pelatihan-video-list"
+
+export const metadata: Metadata = {
+  title: "Klinik Pelatih Muda",
+  description: "Kompilasi berbagai referensi video praktik latihan fisik sepak bola untuk membantu menyusun program latihan yang terstruktur dan efektif.",
+}
 
 export default async function PelatihanPage() {
   const trainingVideos = await getTrainings()

@@ -126,7 +126,7 @@ export default async function AdminPengaturanPage({
 
               <Field>
                 <FieldLabel htmlFor="whatsapp-template">
-                  Template konfirmasi user
+                  Template konfirmasi pengguna
                 </FieldLabel>
                 <textarea
                   id="whatsapp-template"
@@ -137,7 +137,7 @@ export default async function AdminPengaturanPage({
                 />
                 <FieldDescription>
                   Gunakan placeholder berikut agar isi pesan menyesuaikan data
-                  booking user:
+                  booking pengguna:
                 </FieldDescription>
                 <div className="flex flex-wrap gap-2">
                   {templatePlaceholders.map((item) => (
@@ -154,7 +154,7 @@ export default async function AdminPengaturanPage({
             </FieldGroup>
 
             <div className="flex justify-end">
-              <Button type="submit">Simpan pengaturan</Button>
+              <Button type="submit" variant="brand">Simpan pengaturan</Button>
             </div>
           </form>
         </section>
@@ -167,7 +167,7 @@ export default async function AdminPengaturanPage({
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">Admin aktif</h2>
             <p className="text-sm leading-6 text-muted-foreground">
-              User dengan role admin bisa mengakses dashboard admin dan seluruh
+              Pengguna dengan role admin bisa mengakses dashboard admin dan seluruh
               pengaturannya.
             </p>
           </div>
@@ -201,7 +201,7 @@ export default async function AdminPengaturanPage({
                         <form action={demoteAdminToUser}>
                           <input type="hidden" name="userId" value={admin.id} />
                           <Button type="submit" variant="outline">
-                            Jadikan user biasa
+                            Jadikan pengguna biasa
                           </Button>
                         </form>
                       )}
@@ -217,7 +217,7 @@ export default async function AdminPengaturanPage({
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">Tambah admin</h2>
             <p className="text-sm leading-6 text-muted-foreground">
-              Cari user berdasarkan nama atau email, lalu ubah role-nya menjadi
+              Cari pengguna berdasarkan nama atau email, lalu ubah role-nya menjadi
               admin.
             </p>
           </div>
@@ -232,7 +232,7 @@ export default async function AdminPengaturanPage({
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>User</TableHead>
+                      <TableHead>Pengguna</TableHead>
                       <TableHead>Email</TableHead>
                       <TableHead className="text-right">Aksi</TableHead>
                     </TableRow>
@@ -253,7 +253,7 @@ export default async function AdminPengaturanPage({
                         <TableCell className="text-right">
                           <form action={promoteUserToAdmin}>
                             <input type="hidden" name="userId" value={user.id} />
-                            <Button type="submit">Jadikan admin</Button>
+                            <Button type="submit" variant="brand">Jadikan admin</Button>
                           </form>
                         </TableCell>
                       </TableRow>
@@ -262,12 +262,12 @@ export default async function AdminPengaturanPage({
                 </Table>
               ) : (
                 <p className="p-4 text-sm text-muted-foreground">
-                  Tidak ada user yang cocok dengan pencarian ini.
+                  Tidak ada pengguna yang cocok dengan pencarian ini.
                 </p>
               )
             ) : (
               <p className="p-4 text-sm text-muted-foreground">
-                Masukkan nama atau email user terlebih dulu untuk mencari akun.
+                Masukkan nama atau email pengguna terlebih dulu untuk mencari akun.
               </p>
             )}
           </div>

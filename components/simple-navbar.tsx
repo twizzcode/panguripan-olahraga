@@ -28,8 +28,8 @@ import { siteConfig } from "@/lib/site-config"
 
 const navItems = [
   { name: "Halaman Utama", href: "/" },
-  { name: "Jadwal Lapangan", href: "/booking" },
-  { name: "Klinik Pelatih", href: "/pelatihan" },
+  { name: "Jadwal Lapangan", href: "/jadwal-lapangan" },
+  { name: "Klinik Pelatih", href: "/klinik-pelatih" },
 ]
 
 function getInitials(name?: string | null, email?: string | null) {

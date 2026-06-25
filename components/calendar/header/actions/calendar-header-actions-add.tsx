@@ -14,7 +14,7 @@ export default function CalendarHeaderActionsAdd() {
   const session = authClient.useSession()
 
   function handleClick() {
-    const destination = `/booking/create?date=${format(date, 'yyyy-MM-dd')}`
+    const destination = `/jadwal-lapangan/create?date=${format(date, 'yyyy-MM-dd')}`
 
     if (!session.data?.user) {
       router.push(`/login?next=${encodeURIComponent(destination)}`)

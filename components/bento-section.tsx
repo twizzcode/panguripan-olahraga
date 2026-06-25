@@ -37,7 +37,7 @@ const features = [
     name: "Jadwal Lapangan Galang Pengampon",
     description:
       "Lihat daftar ketersediaan waktu dan atur jadwal pemakaian lapangan desa.",
-    href: "/booking",
+    href: "/jadwal-lapangan",
     cta: "Buka jadwal",
     background: (
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(0,0,0,0.08),_transparent_45%),linear-gradient(180deg,_rgba(0,0,0,0.02),_transparent_70%)]" />
@@ -49,7 +49,7 @@ const features = [
     name: "Klinik Pelatih Muda",
     description:
       "Akses materi edukasi pelatih sepak bola yang efektif dan mudah dipelajari.",
-    href: "/pelatihan",
+    href: "/klinik-pelatih",
     cta: "Lihat pelatihan",
     background: (
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,0,0,0.06),_transparent_40%),linear-gradient(225deg,_rgba(0,0,0,0.03),_transparent_70%)]" />

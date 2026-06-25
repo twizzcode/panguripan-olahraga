@@ -12,8 +12,8 @@ import Image from "next/image";
 
 const infoLinks = [
   { label: "Halaman Utama", href: "/" },
-  { label: "Jadwal Lapangan", href: "/booking" },
-  { label: "Klinik Pelatih", href: "/pelatihan" },
+  { label: "Jadwal Lapangan", href: "/jadwal-lapangan" },
+  { label: "Klinik Pelatih", href: "/klinik-pelatih" },
   { label: "Riwayat Jadwal", href: "/riwayat-booking" },
 ];
 

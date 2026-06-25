@@ -21,7 +21,7 @@ async function requireAdmin() {
 
 function revalidateSettingsPages() {
   revalidatePath("/admin/pengaturan");
-  revalidatePath("/booking");
+  revalidatePath("/jadwal-lapangan");
   revalidatePath("/riwayat-booking");
 }
 

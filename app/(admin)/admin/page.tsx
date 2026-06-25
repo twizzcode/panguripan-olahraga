@@ -7,6 +7,7 @@ import {
   IconCalendarStats,
   IconClockHour4,
   IconUsers,
+  IconClock,
 } from "@tabler/icons-react";
 
 import { DashboardBookingsChart } from "@/app/(admin)/admin/dashboard-bookings-chart";
@@ -64,6 +65,8 @@ export default async function AdminPage() {
       .select({
         id: bookings.id,
         createdAt: bookings.createdAt,
+        durationHours: bookings.durationHours,
+        approvalStatus: bookings.approvalStatus,
       })
       .from(bookings)
       .where(gte(bookings.createdAt, thirtyDaysAgo)),
@@ -95,30 +98,39 @@ export default async function AdminPage() {
   const totalApprovedBookings = approvedBookings.length;
   const recentBookingsCount = recentBookings.length;
   const recentApprovedBookings = approvedBookings.filter((booking) => booking.createdAt >= thirtyDaysAgo).length;
+  const totalRecentHours = recentBookings
+    .filter((booking) => booking.approvalStatus === "approved")
+    .reduce((sum, booking) => sum + (booking.durationHours || 0), 0);
 
   const chartData = buildMonthlyBookingChartData(monthlyBookings, chartRangeStart);
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {[
           {
-            label: "User aktif",
+            label: "Pengguna aktif",
             value: formatCount(totalUsers),
             description: "Total semua akun yang sudah terdaftar, termasuk admin.",
             icon: IconUsers,
           },
           {
-            label: "Booking disetujui",
+            label: "Pengajuan disetujui",
             value: formatCount(totalApprovedBookings),
-            description: "Total booking yang sudah disetujui admin.",
+            description: "Total pengajuan yang sudah disetujui admin.",
             icon: IconCalendarStats,
           },
           {
-            label: "Booking 30 hari terakhir",
+            label: "Pengajuan 30 hari terakhir",
             value: formatCount(recentBookingsCount),
-            description: "Jumlah booking yang dibuat dalam 30 hari terakhir.",
+            description: "Jumlah pengajuan yang dibuat dalam 30 hari terakhir.",
             icon: IconClockHour4,
+          },
+          {
+            label: "Total jam 30 hari terakhir",
+            value: formatCount(totalRecentHours),
+            description: "Total durasi jam dari pengajuan yang disetujui dalam 30 hari terakhir.",
+            icon: IconClock,
           },
         ].map((item) => (
           <section
@@ -143,15 +155,15 @@ export default async function AdminPage() {
         ))}
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+      <div className="grid gap-6">
         <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-1">
               <h2 className="text-lg font-semibold">
-                Total pengunjung booking 12 bulan terakhir
+                Total pengunjung 12 bulan terakhir
               </h2>
               <p className="text-sm leading-6 text-muted-foreground">
-                Jumlah booking per bulan berdasarkan jadwal acara yang sudah
+                Jumlah jadwal per bulan berdasarkan jadwal acara yang sudah
                 tercatat.
               </p>
             </div>
@@ -162,46 +174,19 @@ export default async function AdminPage() {
             <DashboardBookingsChart data={chartData} />
           </div>
         </section>
-
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <h2 className="text-lg font-semibold">30 hari terakhir</h2>
-              <p className="text-sm leading-6 text-muted-foreground">
-                Ringkasan aktivitas terbaru dari booking yang baru masuk.
-              </p>
-            </div>
-            <Badge variant="outline">{formatCount(recentBookingsCount)} booking</Badge>
-          </div>
-
-          <div className="mt-6 space-y-4">
-            <div className="rounded-2xl border border-border p-4">
-              <p className="text-sm text-muted-foreground">Booking baru</p>
-              <p className="mt-2 text-2xl font-semibold">
-                {formatCount(recentBookingsCount)}
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border p-4">
-              <p className="text-sm text-muted-foreground">Booking disetujui</p>
-              <p className="mt-2 text-2xl font-semibold">
-                {formatCount(recentApprovedBookings)}
-              </p>
-            </div>
-          </div>
-        </section>
       </div>
 
       <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
         <div className="flex items-center justify-between gap-4">
           <div className="space-y-1">
-            <h2 className="text-lg font-semibold">Riwayat booking terdekat</h2>
+            <h2 className="text-lg font-semibold">Riwayat pengajuan terdekat</h2>
             <p className="text-sm leading-6 text-muted-foreground">
-              Menampilkan 10 booking berikutnya yang akan terlaksana.
+              Menampilkan 10 pengajuan berikutnya yang akan terlaksana.
             </p>
           </div>
           <Button variant="outline" asChild>
-            <Link href="/admin/booking">
-              Lihat semua booking
+            <Link href="/admin/jadwal-lapangan">
+              Lihat semua pengajuan
               <IconArrowRight className="size-4" />
             </Link>
           </Button>
@@ -265,7 +250,7 @@ export default async function AdminPage() {
                     colSpan={7}
                     className="py-10 text-center text-muted-foreground"
                   >
-                    Belum ada booking mendatang.
+                    Belum ada pengajuan mendatang.
                   </TableCell>
                 </TableRow>
               )}

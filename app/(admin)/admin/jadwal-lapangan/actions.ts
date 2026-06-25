@@ -17,8 +17,8 @@ async function requireAdmin() {
 }
 
 function revalidateBookingPages() {
-  revalidatePath("/admin/booking");
-  revalidatePath("/booking");
+  revalidatePath("/admin/jadwal-lapangan");
+  revalidatePath("/jadwal-lapangan");
   revalidatePath("/riwayat-booking");
 }
 

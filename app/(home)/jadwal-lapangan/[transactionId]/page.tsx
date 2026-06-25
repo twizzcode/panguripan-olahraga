@@ -16,7 +16,7 @@ export default async function BookingPaymentPage({
   const session = await getSession();
 
   if (!session?.user) {
-    redirect("/login?next=/booking");
+    redirect("/login?next=/jadwal-lapangan");
   }
 
   const { transactionId } = await params;

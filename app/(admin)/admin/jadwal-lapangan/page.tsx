@@ -18,8 +18,8 @@ import { IconCoin, IconTrash } from "@tabler/icons-react";
 import {
   approveBooking,
   deleteBooking,
-} from "@/app/(admin)/admin/booking/actions";
-import { BookingFilters } from "@/app/(admin)/admin/booking/booking-filters";
+} from "@/app/(admin)/admin/jadwal-lapangan/actions";
+import { BookingFilters } from "@/app/(admin)/admin/jadwal-lapangan/booking-filters";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -94,7 +94,7 @@ function buildBookingHref({
 
   const query = params.toString();
 
-  return query ? `/admin/booking?${query}` : "/admin/booking";
+  return query ? `/admin/jadwal-lapangan?${query}` : "/admin/jadwal-lapangan";
 }
 
 function getTabWhereClause(tab: BookingTab, now: Date) {
@@ -184,10 +184,10 @@ export default async function AdminBookingPage({
       <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-2">
-            <h2 className="text-lg font-semibold">Kelola booking</h2>
+            <h2 className="text-lg font-semibold">Kelola Jadwal</h2>
             <p className="text-sm text-muted-foreground">
-              Pisahkan booking yang belum disetujui, booking yang akan datang,
-              dan riwayat booking yang sudah lewat.
+              Pisahkan jadwal yang belum disetujui, jadwal yang akan datang,
+              dan riwayat jadwal yang sudah lewat.
             </p>
           </div>
 
@@ -288,7 +288,7 @@ export default async function AdminBookingPage({
                         {request.approvalStatus !== "approved" ? (
                           <form action={approveBooking}>
                             <input type="hidden" name="id" value={request.id} />
-                            <Button size="sm" variant="outline">
+                            <Button size="sm" variant="brand">
                               <IconCoin className="size-4" />
                               Setujui
                             </Button>

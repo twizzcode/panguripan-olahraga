@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { format } from "date-fns";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -15,6 +16,11 @@ import {
 } from "@/components/ui/table";
 import { getSession } from "@/lib/auth";
 import { getRecentBookingsByUserId } from "@/lib/bookings";
+
+export const metadata: Metadata = {
+  title: "Riwayat Booking",
+  description: "Lihat riwayat booking lapangan sepak bola Anda di Panguripan Olahraga.",
+}
 
 export const dynamic = "force-dynamic";
 
@@ -90,7 +96,7 @@ export default async function BookingHistoryPage() {
                   <TableCell className="text-right">
                     <Button size="icon-sm" variant="outline" asChild>
                       <Link
-                        href={`/booking/${booking.transactionId}`}
+                        href={`/jadwal-lapangan/${booking.transactionId}`}
                         aria-label="Lihat pembayaran booking"
                       >
                         <IconFileInvoice className="size-4" />

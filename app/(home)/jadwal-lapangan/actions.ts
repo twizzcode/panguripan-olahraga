@@ -86,7 +86,7 @@ export async function createBooking(
 
   await db.insert(bookings).values(booking);
 
-  revalidatePath("/booking");
+  revalidatePath("/jadwal-lapangan");
 
   return {
     ok: true,

@@ -27,8 +27,8 @@ async function requireAdmin() {
 }
 
 function revalidateTrainingPages() {
-  revalidatePath("/pelatihan");
-  revalidatePath("/admin/pelatihan");
+  revalidatePath("/klinik-pelatih");
+  revalidatePath("/admin/klinik-pelatih");
 }
 
 export async function createTraining(formData: FormData) {

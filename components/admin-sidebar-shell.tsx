@@ -56,11 +56,12 @@ import {
   SidebarTrigger,
 } from "@/components/animate-ui/components/radix/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Image from 'next/image';
 
 const adminNavItems = [
-  { title: "Dashboard", href: "/admin", icon: IconLayoutDashboard },
-  { title: "Booking", href: "/admin/booking", icon: IconCalendarStats },
-  { title: "Pelatihan", href: "/admin/pelatihan", icon: IconBook2 },
+  { title: "Dasbor", href: "/admin", icon: IconLayoutDashboard },
+  { title: "Jadwal", href: "/admin/jadwal-lapangan", icon: IconCalendarStats },
+  { title: "Pelatihan", href: "/admin/klinik-pelatih", icon: IconBook2 },
   { title: "Pengaturan", href: "/admin/pengaturan", icon: IconSettings },
 ]
 
@@ -80,119 +81,6 @@ function getAdminPageTitle(pathname: string) {
   }
 
   return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1)
-}
-
-const DATA = {
-  user: {
-    name: 'Skyleen',
-    email: 'skyleen@example.com',
-    avatar:
-      'https://pbs.twimg.com/profile_images/1909615404789506048/MTqvRsjo_400x400.jpg',
-  },
-  navMain: [
-    {
-      title: 'Playground',
-      url: '#',
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: 'History',
-          url: '#',
-        },
-        {
-          title: 'Starred',
-          url: '#',
-        },
-        {
-          title: 'Settings',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Models',
-      url: '#',
-      icon: Bot,
-      items: [
-        {
-          title: 'Genesis',
-          url: '#',
-        },
-        {
-          title: 'Explorer',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Documentation',
-      url: '#',
-      icon: BookOpen,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
-  ],
 }
 
 export function AdminSidebarShell({
@@ -239,12 +127,17 @@ export function AdminSidebarShell({
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  {/* <activeTeam.logo className="size-4" /> */}
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg  text-sidebar-primary-foreground">
+                  <Image
+                    src="/logo.png"
+                    alt="Logo"
+                    width={24}
+                    height={24}
+                  />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    PanguripBooking
+                    Pangurip Olahraga
                   </span>
                   <span className="truncate text-xs">
                     Admin
@@ -258,7 +151,7 @@ export function AdminSidebarShell({
 
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+            <SidebarGroupLabel>Navigasi</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {adminNavItems.map((item) => {
