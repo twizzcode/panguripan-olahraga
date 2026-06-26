@@ -264,15 +264,15 @@ export function AdminSidebarShell({
         <SidebarRail />
       </Sidebar>
 
-      <SidebarInset className="min-h-svh">
-        <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-border/70 bg-background/95 px-4 backdrop-blur sm:px-6">
+      <SidebarInset className="min-h-svh min-w-0 overflow-x-hidden">
+        <header className="sticky top-0 z-20 flex h-16 min-w-0 items-center gap-3 border-b border-border/70 bg-background/95 px-4 backdrop-blur sm:px-6">
           <SidebarTrigger />
           <h1 className="min-w-0 text-lg font-semibold tracking-tight">
             {pageTitle}
           </h1>
         </header>
-
-        <div className="flex flex-1 flex-col px-4 py-6 sm:px-6">{children}</div>
+ 
+        <div className="flex min-w-0 flex-1 flex-col px-4 py-6 sm:px-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )

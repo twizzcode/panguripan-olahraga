@@ -94,9 +94,9 @@ export default async function AdminPengaturanPage({
     : [];
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] xl:items-start">
-      <div className="space-y-6">
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+    <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] xl:items-start">
+      <div className="min-w-0 space-y-6">
+        <section className="min-w-0 rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">WhatsApp admin</h2>
             <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -162,8 +162,8 @@ export default async function AdminPengaturanPage({
 
       </div>
 
-      <div className="space-y-6">
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+      <div className="min-w-0 space-y-6">
+        <section className="min-w-0 rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">Admin aktif</h2>
             <p className="text-sm leading-6 text-muted-foreground">
@@ -172,8 +172,8 @@ export default async function AdminPengaturanPage({
             </p>
           </div>
 
-          <div className="mt-6 overflow-hidden rounded-2xl border border-border">
-            <Table>
+            <div className="mt-6 min-w-0 overflow-x-auto rounded-2xl border border-border">
+            <Table className="min-w-[640px]">
               <TableHeader>
                 <TableRow>
                   <TableHead>Admin</TableHead>
@@ -185,22 +185,22 @@ export default async function AdminPengaturanPage({
                 {admins.map((admin) => (
                   <TableRow key={admin.id}>
                     <TableCell>
-                      <div className="flex items-center gap-3">
-                        <Avatar size="lg">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <Avatar size="lg" className="shrink-0">
                           <AvatarImage src={admin.image ?? undefined} alt={admin.name} />
                           <AvatarFallback>{getInitials(admin.name)}</AvatarFallback>
                         </Avatar>
-                        <span className="font-medium text-foreground">{admin.name}</span>
+                        <span className="min-w-0 truncate font-medium text-foreground">{admin.name}</span>
                       </div>
                     </TableCell>
-                    <TableCell>{admin.email}</TableCell>
+                    <TableCell className="max-w-[220px] truncate">{admin.email}</TableCell>
                     <TableCell className="text-right">
                       {session?.user?.id === admin.id ? (
                         <Badge variant="outline">Akun kamu</Badge>
                       ) : (
-                        <form action={demoteAdminToUser}>
+                        <form action={demoteAdminToUser} className="inline-flex max-w-full justify-end">
                           <input type="hidden" name="userId" value={admin.id} />
-                          <Button type="submit" variant="outline">
+                          <Button type="submit" variant="outline" className="max-w-full whitespace-normal text-right sm:whitespace-nowrap">
                             Jadikan pengguna biasa
                           </Button>
                         </form>
@@ -213,7 +213,7 @@ export default async function AdminPengaturanPage({
           </div>
         </section>
 
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+        <section className="min-w-0 rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">Tambah admin</h2>
             <p className="text-sm leading-6 text-muted-foreground">
@@ -226,10 +226,10 @@ export default async function AdminPengaturanPage({
             <AdminUserSearchInput key={query} defaultValue={query} />
           </div>
 
-          <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+            <div className="mt-6 min-w-0 overflow-x-auto rounded-2xl border border-border">
             {query ? (
               searchResults.length ? (
-                <Table>
+                <Table className="min-w-[640px]">
                   <TableHeader>
                     <TableRow>
                       <TableHead>Pengguna</TableHead>
@@ -241,19 +241,19 @@ export default async function AdminPengaturanPage({
                     {searchResults.map((user) => (
                       <TableRow key={user.id}>
                         <TableCell>
-                          <div className="flex items-center gap-3">
-                            <Avatar size="lg">
+                          <div className="flex min-w-0 items-center gap-3">
+                            <Avatar size="lg" className="shrink-0">
                               <AvatarImage src={user.image ?? undefined} alt={user.name} />
                               <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                             </Avatar>
-                            <span className="font-medium text-foreground">{user.name}</span>
+                            <span className="min-w-0 truncate font-medium text-foreground">{user.name}</span>
                           </div>
                         </TableCell>
-                        <TableCell>{user.email}</TableCell>
+                        <TableCell className="max-w-[220px] truncate">{user.email}</TableCell>
                         <TableCell className="text-right">
-                          <form action={promoteUserToAdmin}>
+                          <form action={promoteUserToAdmin} className="inline-flex max-w-full justify-end">
                             <input type="hidden" name="userId" value={user.id} />
-                            <Button type="submit" variant="brand">Jadikan admin</Button>
+                            <Button type="submit" variant="brand" className="max-w-full whitespace-normal text-right sm:whitespace-nowrap">Jadikan admin</Button>
                           </form>
                         </TableCell>
                       </TableRow>

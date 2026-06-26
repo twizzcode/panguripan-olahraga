@@ -156,9 +156,9 @@ export default async function AdminPage() {
       </div>
 
       <div className="grid gap-6">
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-1">
+        <section className="min-w-0 rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0 space-y-1">
               <h2 className="text-lg font-semibold">
                 Total pengunjung 12 bulan terakhir
               </h2>
@@ -167,33 +167,33 @@ export default async function AdminPage() {
                 tercatat.
               </p>
             </div>
-            <Badge variant="outline">12 bulan</Badge>
+            <Badge variant="outline" className="w-fit">12 bulan</Badge>
           </div>
-
-          <div className="mt-6">
+ 
+          <div className="mt-6 min-w-0 overflow-hidden">
             <DashboardBookingsChart data={chartData} />
           </div>
         </section>
       </div>
 
-      <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-        <div className="flex items-center justify-between gap-4">
-          <div className="space-y-1">
+      <section className="min-w-0 rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1 min-w-0">
             <h2 className="text-lg font-semibold">Riwayat pengajuan terdekat</h2>
             <p className="text-sm leading-6 text-muted-foreground">
               Menampilkan 10 pengajuan berikutnya yang akan terlaksana.
             </p>
           </div>
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild className="w-full sm:w-auto">
             <Link href="/admin/jadwal-lapangan">
               Lihat semua pengajuan
               <IconArrowRight className="size-4" />
             </Link>
           </Button>
         </div>
-
-        <div className="mt-6">
-          <Table>
+ 
+        <div className="mt-6 min-w-0 overflow-x-auto">
+          <Table className="min-w-[720px]">
             <TableHeader>
               <TableRow>
                 <TableHead>ID Transaksi</TableHead>

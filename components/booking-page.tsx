@@ -41,7 +41,7 @@ export function BookingPage({
         <div className="mx-auto max-w-5xl space-y-8">
           <div className="space-y-4">
             <h1 className="text-balance text-4xl font-semibold tracking-tight text-brand sm:text-5xl lg:text-7xl">
-              Jadwal Lapangan Galang Pengempon
+              Jadwal Lapangan Galang Pengampon
             </h1>
             <p className="mx-auto max-w-3xl text-pretty text-base leading-7 text-brand sm:text-lg sm:leading-8">
               Sistem manajemen digital untuk mengatur, memantau, dan merencanakan seluruh agenda penggunaan lapangan terbuka hijau di Desa Galang Pengampon.

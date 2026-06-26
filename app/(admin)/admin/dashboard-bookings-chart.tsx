@@ -2,6 +2,8 @@
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 import {
   ChartContainer,
   ChartTooltip,
@@ -24,17 +26,37 @@ export function DashboardBookingsChart({
     total: number;
   }>;
 }) {
+  const isMobile = useIsMobile();
+
   return (
-    <ChartContainer config={chartConfig} className="h-64 w-full">
-      <BarChart accessibilityLayer data={data} margin={{ left: 4, right: 4 }}>
+    <ChartContainer config={chartConfig} className="h-56 w-full sm:h-64">
+      <BarChart
+        accessibilityLayer
+        data={data}
+        margin={{
+          top: 4,
+          right: isMobile ? 0 : 4,
+          left: isMobile ? -20 : 4,
+          bottom: 0,
+        }}
+      >
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="month"
           tickLine={false}
           axisLine={false}
-          tickMargin={12}
+          tickMargin={isMobile ? 8 : 12}
+          interval={isMobile ? 1 : 0}
+          minTickGap={isMobile ? 24 : 12}
+          fontSize={12}
         />
-        <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={32} />
+        <YAxis
+          allowDecimals={false}
+          tickLine={false}
+          axisLine={false}
+          width={isMobile ? 24 : 32}
+          fontSize={12}
+        />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent indicator="dot" />}
@@ -43,7 +65,7 @@ export function DashboardBookingsChart({
           dataKey="total"
           fill="var(--color-total)"
           radius={[10, 10, 0, 0]}
-          maxBarSize={42}
+          maxBarSize={isMobile ? 24 : 42}
         />
       </BarChart>
     </ChartContainer>

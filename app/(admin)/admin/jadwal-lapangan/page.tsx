@@ -180,8 +180,8 @@ export default async function AdminBookingPage({
   const safePage = Math.min(page, totalPages);
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+    <div className="min-w-0 space-y-6">
+      <section className="min-w-0 rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">Kelola Jadwal</h2>
@@ -234,8 +234,8 @@ export default async function AdminBookingPage({
           })}
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-2xl border border-border">
-          <Table>
+        <div className="mt-6 min-w-0 overflow-hidden rounded-2xl border border-border">
+          <Table className="min-w-[980px]">
             <TableHeader>
               <TableRow>
                 <TableHead>ID Transaksi</TableHead>

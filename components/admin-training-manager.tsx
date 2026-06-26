@@ -140,8 +140,8 @@ export function AdminTrainingManager({
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
+    <div className="min-w-0 space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-lg font-semibold">Daftar Pelatihan</h2>
           <p className="text-sm text-muted-foreground">
@@ -180,7 +180,7 @@ export function AdminTrainingManager({
       </div>
 
         {trainings.length ? (
-          <Table>
+          <Table className="min-w-[980px]">
             <TableHeader>
               <TableRow>
                 <TableHead>Urutan</TableHead>
