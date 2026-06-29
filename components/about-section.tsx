@@ -118,14 +118,6 @@ export function AboutSection() {
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
                   Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga <span className="font-bold">Desa Galang Pengampon beserta deskripsi kerja setiap bidang kegiatan dan prasarana</span>.
                 </p>
-
-                <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8 mt-2">
-                  <span className="font-bold">Penjelasan kenapa SOP tata kelola kegiatan dan prasarana</span>
-                </p>
-                <ul className="list-decimal pl-5 max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                  <li>SOP tata kelola kegiatan artinya aturan kegiatan sepak bola di Desa Galang Pengampon yakni turnamen dan latihan rutin sepak bola</li>
-                  <li>SOP Prasarana artinya aturan penggunaan dan lainnya terkait lapangan</li>
-                </ul>
               </div>
             </motion.div>
 
