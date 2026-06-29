@@ -116,7 +116,7 @@ export function AboutSection() {
                   Wruh Raga
                 </h3>
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                  Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga <span className="font-bold">Desa Galang Pengampon beserta deskripsi kerja setiap bidang kegiatan dan prasarana</span>.
+                  Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga <span className="font-bold">Desa Galang Pengampon beserta SOP tata kelola kegiatan dan prasarana</span>.
                 </p>
               </div>
             </motion.div>
