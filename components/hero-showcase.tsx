@@ -37,7 +37,7 @@ export function HeroShowcase() {
             Olahraga
           </h1>
           <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-            Sebuah Program Kreativitas Mahasiswa bidang Pengabdian kepada Masyarakat (PKM-PM) dengan luaran yang mengintegrasikan website pengelolaan jadwal penggunaan lapangan dan akses video panduan kepelatihan pelatih sepak bola demi menciptakan sistem pemuda yang terstruktur dan berkelanjutan.
+            Sebuah Program Kreativitas Mahasiswa bidang Pengabdian kepada Masyarakat (PKM-PM) dengan luaran yang mengintegrasikan <span className="italic">website</span> pengelolaan jadwal penggunaan lapangan dan akses video panduan kepelatihan pelatih sepak bola demi menciptakan sistem pemuda yang terstruktur dan berkelanjutan.
           </p>
         </motion.div>
 

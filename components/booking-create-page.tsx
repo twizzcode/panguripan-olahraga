@@ -359,7 +359,7 @@ export function BookingCreatePage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Jadwal sudah terisi</AlertDialogTitle>
             <AlertDialogDescription>
-              Tanggal dan jam yang dipilih bentrok dengan jadwallain. Pilih
+              Tanggal dan jam yang dipilih bentrok dengan jadwal lain. Pilih
               jam atau tanggal yang berbeda.
             </AlertDialogDescription>
           </AlertDialogHeader>
