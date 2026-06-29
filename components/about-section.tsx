@@ -116,7 +116,7 @@ export function AboutSection() {
                   Wruh Raga
                 </h3>
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                  Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga <span className="font-bold">Desa Galang Pengampon beserta SOP tata kelola kegiatan dan prasarana</span>.
+                  Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga Desa Galang Pengampon beserta SOP tata kelola kegiatan dan prasarana.
                 </p>
               </div>
             </motion.div>
@@ -136,7 +136,7 @@ export function AboutSection() {
               </div>
               <div className="pl-16">
                 <h3 className="mt-2 text-xl font-semibold text-brand sm:text-2xl">
-                  Mulat Subuda
+                  Mulat Sembada
                 </h3>
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
                   Sesi pelatihan berbasis modul dan uji praktik yang dioptimalkan dengan integrasi platform digital sederhana untuk mencetak 10 peserta kompeten dalam tata kelola kegiatan dan 5 peserta kompeten dalam dasar pelatih sepak bola berdasarkan instrumen rubrik penilaian.
