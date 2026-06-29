@@ -100,8 +100,8 @@ export default async function AdminPengaturanPage({
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">WhatsApp admin</h2>
             <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-              Nomor ini dipakai untuk tombol konfirmasi pembayaran user pada halaman
-              booking.
+              Nomor ini dipakai untuk tombol konfirmasi persetujuan pengguna pada halaman
+              jadwal.
             </p>
           </div>
 
@@ -137,7 +137,7 @@ export default async function AdminPengaturanPage({
                 />
                 <FieldDescription>
                   Gunakan placeholder berikut agar isi pesan menyesuaikan data
-                  booking pengguna:
+                  jadwal pengusul:
                 </FieldDescription>
                 <div className="flex flex-wrap gap-2">
                   {templatePlaceholders.map((item) => (
