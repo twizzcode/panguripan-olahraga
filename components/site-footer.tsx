@@ -3,6 +3,8 @@
 import Link from "next/link";
 import {
   IconBrandInstagram,
+  IconBrandTiktok,
+  IconBrandYoutube,
   IconHeartFilled,
 } from "@tabler/icons-react";
 
@@ -43,14 +45,33 @@ export function SiteFooter() {
               {siteConfig.description}
             </p>
 
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="inline-flex items-center gap-2 text-sm text-brand-foreground/70 transition-colors hover:text-brand-foreground"
-            >
-              <IconBrandInstagram className="size-5" />
-              @pkm.panguripanolahraga
-            </a>
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://www.instagram.com/pkm.panguripanolahraga/"
+                aria-label="Instagram"
+                className="inline-flex items-center gap-2 text-sm text-brand-foreground/70 transition-colors hover:text-brand-foreground"
+              >
+                <IconBrandInstagram className="size-5" />
+                @pkm.panguripanolahraga
+              </a>
+              <a
+                href="https://www.tiktok.com/@pkm.panguripanolahraga"
+                aria-label="TikTok"
+                className="inline-flex items-center gap-2 text-sm text-brand-foreground/70 transition-colors hover:text-brand-foreground"
+              >
+                <IconBrandTiktok className="size-5" />
+                @pkm.panguripanolahraga
+              </a>
+              <a
+                href="https://www.youtube.com/@pkm.panguripanolahraga"
+                aria-label="YouTube"
+                className="inline-flex items-center gap-2 text-sm text-brand-foreground/70 transition-colors hover:text-brand-foreground"
+              >
+                <IconBrandYoutube className="size-5" />
+                @pkm.panguripanolahraga
+              </a>
+            </div>
+
           </div>
 
           <div className="lg:flex lg:justify-center">

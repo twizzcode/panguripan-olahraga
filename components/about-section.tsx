@@ -17,24 +17,71 @@ export function AboutSection() {
             Program Kreativitas Mahasiswa
           </h2>
           <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-            Program Kreativitas Mahasiswa bidang Pengabdian kepada Masyarakat (PKM-PM) tahun 2026 oleh Direktorat Pembelajaran dan Kemahasiswaan (Belmawa) merupakan program penerapan ilmu pengetahuan, teknologi, dan seni (IPTEKS) untuk membantu meningkatkan kualitas hidup masyarakat mitra nirlaba yang mengacu pada tema ke-6, yaitu Penguatan Pendidikan, Sains, dan Teknologi.
+            Program Kreativitas Mahasiswa diharapkan dapat memicu dan merealisasikan kreativitas mahasiswa untuk memecahkan berbagai permasalahan di masyarakat dan mensinergikan ide serta karya kreatifnya untuk mendukung program prioritas pemerintah. Salah satu wadahnya melalui Program Kreativitas Mahasiswa bidang Pengabdian kepada Masyarakat (PKM-PM), yang merupakan program penerapan ilmu pengetahuan, teknologi, dan seni dalam upaya untuk membantu meningkatkan kualitas hidup, mengakhiri kemiskinan, mengurangi kesenjangan, dan melindungi lingkungan. Sebagai bentuk apresiasi atas kelancaran pelaksanaan program ini, terima kasih diucapkan atas segala peran, kontribusi, maupun dukungan pendanaan dari seluruh pihak terkait.
           </p>
         </motion.div>
 
         <motion.div
-          className="flex justify-center"
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         >
-          <Image
-            src="/dikti.png"
-            alt="Logo Dikti dan Partner"
-            width={1200}
-            height={200}
-            className="w-full max-w-5xl"
-          />
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo/tutwuri.png"
+              alt="Logo Tutwuri"
+              width={150}
+              height={150}
+              className="h-[100px] w-auto"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo/diktiberdampak.png"
+              alt="Logo Dikti Berdampak"
+              width={150}
+              height={150}
+              className="h-[100px] w-auto"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo/belmawa.png"
+              alt="Logo Belmawa"
+              width={150}
+              height={150}
+              className="h-[100px] w-auto"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo/simbelmawaa.png"
+              alt="Logo Simbelmawa"
+              width={150}
+              height={150}
+              className="h-[100px] w-auto"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo/pkm.png"
+              alt="Logo PKM"
+              width={150}
+              height={150}
+              className="h-[100px] w-auto"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo/unnes.png"
+              alt="Logo UNNES"
+              width={150}
+              height={150}
+              className="h-[100px] w-auto"
+            />
+          </div>
         </motion.div>
 
         <motion.div
@@ -47,7 +94,7 @@ export function AboutSection() {
             Tentang Panguripan Olahraga
           </h2>
           <p className="mb-12 max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-            Program "Panguripan Olahraga" Universitas Negeri Semarang dirancang berdasarkan latar belakang lemahnya tata kelola organisasi keolahragaan dan rendahnya kompetensi Karang Taruna Tunas Bangkit Desa Galang Pengampon Pekalangan menjadi model pemberdayaan berbasis pendekatan self-help melalui empat sesi tahap pelaksanaan.
+            Program "Panguripan Olahraga" Universitas Negeri Semarang dirancang berdasarkan latar belakang lemahnya tata kelola organisasi keolahragaan dan rendahnya kompetensi Karang Taruna Tunas Bangkit Desa Galang Pengampon Pekalongan menjadi model pemberdayaan berbasis pendekatan <span className="italic">self-help</span> melalui empat sesi tahap pelaksanaan.
           </p>
 
           <div className="ml-3.5">
@@ -69,8 +116,16 @@ export function AboutSection() {
                   Wruh Raga
                 </h3>
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                  Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga Desa Galang Pengampon beserta deskripsi kerja setiap bidang kegiatan dan prasarana.
+                  Sesi peningkatan literasi komunitas olahraga melalui sosialisasi dan <span className="italic">Focus Group Discussion</span> (FGD) untuk membangun kesadaran awal, komitmen mitra, serta menghasilkan dokumen SK Tim Pengelola Olahraga <span className="font-bold">Desa Galang Pengampon beserta deskripsi kerja setiap bidang kegiatan dan prasarana</span>.
                 </p>
+
+                <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8 mt-2">
+                  <span className="font-bold">Penjelasan kenapa SOP tata kelola kegiatan dan prasarana</span>
+                </p>
+                <ul className="list-decimal pl-5 max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+                  <li>SOP tata kelola kegiatan artinya aturan kegiatan sepak bola di Desa Galang Pengampon yakni turnamen dan latihan rutin sepak bola</li>
+                  <li>SOP Prasarana artinya aturan penggunaan dan lainnya terkait lapangan</li>
+                </ul>
               </div>
             </motion.div>
 
@@ -92,7 +147,7 @@ export function AboutSection() {
                   Mulat Subuda
                 </h3>
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                  Sesi pelatihan berbasis modul dan uji praktik yang dioptimalkan dengan integrasi platform digital sederhana untuk mencetak 10 peserta kompeten dalam tata kelola kegiatan dan 5 peserta kompeten dalam dasar coaching sepak bola berdasarkan instrumen rubrik penilaian.
+                  Sesi pelatihan berbasis modul dan uji praktik yang dioptimalkan dengan integrasi platform digital sederhana untuk mencetak 10 peserta kompeten dalam tata kelola kegiatan dan 5 peserta kompeten dalam dasar pelatih sepak bola berdasarkan instrumen rubrik penilaian.
                 </p>
               </div>
             </motion.div>
@@ -115,7 +170,7 @@ export function AboutSection() {
                   Tumuwuh Mardika
                 </h3>
                 <p className="max-w-4xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
-                  Sesi uji mandiri melalui pendekataan self-help di mana mitra menguji ketahanan organisasi secara langsung melalui penyelenggaraan turnamen "Festival Sepak Bola Desa" dan pelaksanaan latihan rutin mingguan bernama "Klinik Pelatih Muda".
+                  Sesi uji mandiri melalui pendekataan <span className="italic">self-help</span> di mana mitra menguji ketahanan organisasi secara langsung melalui penyelenggaraan turnamen "Festival Sepak Bola Desa" dan pelaksanaan latihan rutin sepak bola bernama "Klinik Pelatih Muda".
                 </p>
               </div>
             </motion.div>
@@ -150,7 +205,7 @@ export function AboutSection() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
           >
-            Salah satu luaran dari pelaksanaan program ini yaitu <span className="font-medium italic">website</span> "Panguripan Olahraga" yang secara komprehensif mengintegrasikan sistem manajemen digital jadwal lapangan desa, serta platform edukasi "Klinik Pelatih Muda" berisi kompilasi video panduan kepelatihan sepak bola sebagai instrumen keberlanjutan.
+            Salah satu luaran dari pelaksanaan program ini yaitu <span className="font-medium italic">website</span> "Panguripan Olahraga" yang secara komprehensif mengintegrasikan sistem manajemen digital jadwal lapangan desa, serta platform edukasi "Klinik Pelatih Muda" berisi kompilasi video panduan pelatih sepak bola sebagai instrumen keberlanjutan.
           </motion.p>
         </motion.div>
       </div>
