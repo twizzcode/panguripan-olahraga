@@ -34,9 +34,8 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 
-const startTimeOptions = Array.from({ length: 16 }, (_, index) => {
-  const hour = index + 7;
-  return `${String(hour).padStart(2, "0")}:00`;
+const startTimeOptions = Array.from({ length: 25 }, (_, index) => {
+  return `${String(index).padStart(2, "0")}:00`;
 });
 
 const durationOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
