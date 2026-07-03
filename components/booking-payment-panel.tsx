@@ -36,7 +36,7 @@ export function BookingPaymentPanel({
               value={format(booking.startsAt, "dd MMMM yyyy", { locale: id })}
             />
             <InfoItem
-              label="Jam booking"
+              label="Jam Pengajuan"
               value={`${formatBookingTime(booking.startsAt)} - ${formatBookingTime(
                 booking.endsAt
               )}`}

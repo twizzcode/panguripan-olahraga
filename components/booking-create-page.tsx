@@ -380,7 +380,7 @@ export function BookingCreatePage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Booking gagal disimpan</AlertDialogTitle>
             <AlertDialogDescription>
-              Ada masalah saat menyimpan booking. Coba login ulang atau periksa
+              Ada masalah saat menyimpan pengajuan. Coba login ulang atau periksa
               kembali data yang diisi.
             </AlertDialogDescription>
           </AlertDialogHeader>

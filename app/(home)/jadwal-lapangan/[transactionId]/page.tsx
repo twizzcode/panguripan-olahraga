@@ -53,8 +53,8 @@ export default async function BookingPaymentPage({
         </h1>
         <p className="text-sm text-muted-foreground sm:text-base">
           {booking.approvalStatus === "approved"
-            ? "Booking ini sudah disetujui admin."
-            : "Booking ini belum disetujui. Hubungi admin untuk konfirmasi."}
+            ? "Jadwal ini sudah disetujui admin."
+            : "Jadwal ini belum disetujui. Hubungi admin untuk konfirmasi."}
         </p>
       </div>
 

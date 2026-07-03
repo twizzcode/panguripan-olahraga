@@ -38,10 +38,10 @@ export default async function BookingHistoryPage() {
     <div className="w-full py-8 sm:py-10">
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          Riwayat booking
+          Riwayat Pengajuan
         </h1>
         <p className="text-sm text-muted-foreground sm:text-base">
-          Menampilkan 10 booking terbaru yang pernah kamu buat.
+          Menampilkan 10 pengajuan terbaru yang pernah kamu buat.
         </p>
       </div>
 
@@ -98,7 +98,7 @@ export default async function BookingHistoryPage() {
                     <Button size="icon-sm" variant="outline" asChild>
                       <Link
                         href={`/jadwal-lapangan/${booking.transactionId}`}
-                        aria-label="Lihat pembayaran booking"
+                        aria-label="Lihat pembayaran pengajuan"
                       >
                         <IconFileInvoice className="size-4" />
                       </Link>
@@ -112,7 +112,7 @@ export default async function BookingHistoryPage() {
                   colSpan={8}
                   className="py-10 text-center text-muted-foreground"
                 >
-                  Belum ada riwayat booking.
+                  Belum ada riwayat pengajuan.
                 </TableCell>
               </TableRow>
             )}
