@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 
@@ -6,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { bookings } from "@/db/schema";
 import {
   buildBookingPaymentWhatsappLink,
+  formatBookingTime,
   qrisImageSrc,
 } from "@/lib/booking-payment";
 
@@ -37,9 +37,8 @@ export function BookingPaymentPanel({
             />
             <InfoItem
               label="Jam booking"
-              value={`${format(booking.startsAt, "HH:mm")} - ${format(
-                booking.endsAt,
-                "HH:mm"
+              value={`${formatBookingTime(booking.startsAt)} - ${formatBookingTime(
+                booking.endsAt
               )}`}
             />
             <InfoItem

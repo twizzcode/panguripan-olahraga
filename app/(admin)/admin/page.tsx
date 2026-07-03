@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/db";
 import { bookings, users } from "@/db/schema";
+import { formatBookingTime } from "@/lib/booking-payment";
 
 export const dynamic = "force-dynamic";
 
@@ -220,8 +221,8 @@ export default async function AdminPage() {
                       })}
                     </TableCell>
                     <TableCell>
-                      {format(booking.startsAt, "HH:mm")} -{" "}
-                      {format(booking.endsAt, "HH:mm")}
+                      {formatBookingTime(booking.startsAt)} -{" "}
+                      {formatBookingTime(booking.endsAt)}
                     </TableCell>
                     <TableCell>{booking.durationHours} jam</TableCell>
                     <TableCell>

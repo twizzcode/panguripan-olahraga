@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { getSession } from "@/lib/auth";
 import { getRecentBookingsByUserId } from "@/lib/bookings";
+import { formatBookingTime } from "@/lib/booking-payment";
 
 export const metadata: Metadata = {
   title: "Riwayat Booking",
@@ -71,8 +72,8 @@ export default async function BookingHistoryPage() {
                     {format(booking.startsAt, "dd MMM yyyy")}
                   </TableCell>
                   <TableCell>
-                    {format(booking.startsAt, "HH:mm")} -{" "}
-                    {format(booking.endsAt, "HH:mm")}
+                    {formatBookingTime(booking.startsAt)} -{" "}
+                    {formatBookingTime(booking.endsAt)}
                   </TableCell>
                   <TableCell>{booking.durationHours} jam</TableCell>
                   <TableCell>
