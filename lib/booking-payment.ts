@@ -5,15 +5,10 @@ import type { bookings } from "@/db/schema";
 
 export const qrisImageSrc = "/qris-placeholder.svg";
 
-const jakartaTimeFormatter = new Intl.DateTimeFormat("id-ID", {
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: "Asia/Jakarta",
-});
-
 export function formatBookingTime(date: Date) {
-  return jakartaTimeFormatter.format(date);
+  const hours = String(date.getUTCHours()).padStart(2, '0');
+  const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
 }
 
 export function applyWhatsappTemplate(

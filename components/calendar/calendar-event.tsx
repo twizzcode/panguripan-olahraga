@@ -39,11 +39,11 @@ function calculateEventPosition(
   const width = `${100 / (overlappingEvents.length + 1)}%`
   const left = `${(position * 100) / (overlappingEvents.length + 1)}%`
 
-  const startHour = event.start.getHours()
-  const startMinutes = event.start.getMinutes()
+  const startHour = event.start.getUTCHours()
+  const startMinutes = event.start.getUTCMinutes()
 
-  let endHour = event.end.getHours()
-  let endMinutes = event.end.getMinutes()
+  let endHour = event.end.getUTCHours()
+  let endMinutes = event.end.getUTCMinutes()
 
   if (!isSameDay(event.start, event.end)) {
     endHour = 23

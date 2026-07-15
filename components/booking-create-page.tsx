@@ -101,14 +101,18 @@ export function BookingCreatePage() {
     const durationHours = Number(formValues.durationHours);
     const selectedDate = new Date(formValues.date);
     const [hours, minutes] = formValues.startTime.split(":").map(Number);
-    const start = new Date(selectedDate);
-    start.setHours(hours || 0, minutes || 0, 0, 0);
+    
+    const year = selectedDate.getFullYear();
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+    const hour = String(hours || 0).padStart(2, '0');
+    const minute = String(minutes || 0).padStart(2, '0');
+    const startISO = `${year}-${month}-${day}T${hour}:${minute}:00.000Z`;
 
     if (
       !formValues.name.trim() ||
       !formValues.institution.trim() ||
       !formValues.whatsapp.trim() ||
-      Number.isNaN(start.getTime()) ||
       Number.isNaN(durationHours) ||
       durationHours <= 0
     ) {
@@ -120,7 +124,7 @@ export function BookingCreatePage() {
       name: formValues.name.trim(),
       institution: formValues.institution.trim(),
       whatsapp: formValues.whatsapp.trim(),
-      start: start.toISOString(),
+      start: startISO,
       durationHours,
     });
 

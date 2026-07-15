@@ -261,8 +261,8 @@ export default async function AdminBookingPage({
                     <TableCell>{request.whatsapp}</TableCell>
                     <TableCell>{format(request.startsAt, "dd MMM yyyy")}</TableCell>
                     <TableCell>
-                      {format(request.startsAt, "HH:mm")} -{" "}
-                      {format(request.endsAt, "HH:mm")}
+                      {String(request.startsAt.getUTCHours()).padStart(2, '0')}:{String(request.startsAt.getUTCMinutes()).padStart(2, '0')} -{" "}
+                      {String(request.endsAt.getUTCHours()).padStart(2, '0')}:{String(request.endsAt.getUTCMinutes()).padStart(2, '0')}
                     </TableCell>
                     <TableCell>{request.durationHours} jam</TableCell>
                     <TableCell>

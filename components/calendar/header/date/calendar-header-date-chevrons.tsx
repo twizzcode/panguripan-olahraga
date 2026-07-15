@@ -5,7 +5,6 @@ import {
   format,
   addDays,
   addWeeks,
-  isSameMonth,
   subDays,
   subWeeks,
 } from 'date-fns'
@@ -13,10 +12,6 @@ import { id } from 'date-fns/locale'
 
 function formatRangeLabel(date: Date, mode: '3 days' | 'week') {
   const endDate = addDays(date, mode === 'week' ? 6 : 2)
-
-  if (isSameMonth(date, endDate)) {
-    return `${format(date, 'd MMMM', { locale: id })}–${format(endDate, 'd, yyyy', { locale: id })}`
-  }
 
   return `${format(date, 'd MMMM', { locale: id })}–${format(endDate, 'd MMMM, yyyy', { locale: id })}`
 }

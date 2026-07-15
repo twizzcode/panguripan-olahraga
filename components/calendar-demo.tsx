@@ -1,6 +1,6 @@
 'use client'
 
-import { startOfDay } from 'date-fns'
+import { startOfDay, startOfWeek } from 'date-fns'
 import { useEffect, useState } from 'react'
 import Calendar from './calendar/calendar'
 import { CalendarEvent, Mode } from './calendar/calendar-types'
@@ -15,7 +15,7 @@ export default function CalendarDemo({
   setEvents,
 }: CalendarDemoProps) {
   const [mode, setMode] = useState<Mode>('3 days')
-  const [date, setDate] = useState<Date>(() => startOfDay(new Date()))
+  const [date, setDate] = useState<Date>(() => startOfWeek(startOfDay(new Date()), { weekStartsOn: 0 }))
 
   useEffect(() => {
     const syncMode = () => {

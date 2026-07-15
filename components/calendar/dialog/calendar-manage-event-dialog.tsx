@@ -66,10 +66,7 @@ export default function CalendarManageEventDialog() {
               <DetailRow
                 icon={Clock3}
                 label="Jam"
-                value={`${format(selectedEvent.start, 'HH:mm')} - ${format(
-                  selectedEvent.end,
-                  'HH:mm'
-                )}`}
+                value={`${String(selectedEvent.start.getUTCHours()).padStart(2, '0')}:${String(selectedEvent.start.getUTCMinutes()).padStart(2, '0')} - ${String(selectedEvent.end.getUTCHours()).padStart(2, '0')}:${String(selectedEvent.end.getUTCMinutes()).padStart(2, '0')}`}
               />
               <DetailRow
                 icon={Clock3}
