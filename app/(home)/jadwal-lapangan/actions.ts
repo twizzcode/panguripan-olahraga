@@ -60,7 +60,7 @@ export async function createBooking(
   }
 
   const end = new Date(start);
-  end.setHours(end.getHours() + parsed.data.durationHours);
+  end.setUTCHours(end.getUTCHours() + parsed.data.durationHours);
 
   if (await hasBookingConflict(start, end)) {
     return { ok: false, reason: "conflict" };

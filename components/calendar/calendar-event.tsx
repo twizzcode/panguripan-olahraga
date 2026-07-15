@@ -45,7 +45,12 @@ function calculateEventPosition(
   let endHour = event.end.getUTCHours()
   let endMinutes = event.end.getUTCMinutes()
 
-  if (!isSameDay(event.start, event.end)) {
+  const isSameUTCDay = 
+    event.start.getUTCFullYear() === event.end.getUTCFullYear() &&
+    event.start.getUTCMonth() === event.end.getUTCMonth() &&
+    event.start.getUTCDate() === event.end.getUTCDate()
+
+  if (!isSameUTCDay) {
     endHour = 23
     endMinutes = 59
   }
